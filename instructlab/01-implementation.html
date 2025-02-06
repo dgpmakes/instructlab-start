@@ -216,7 +216,7 @@ source venv/bin/activate</code></pre>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://huggingface.co/dgpmakes/granite-7b-lab-Q4_K_M/resolve/main/granite-7b-lab-Q4_K_M.gguf">Modelo sin entrenar: Granite-7B-LAB-Q4_K_M</a></p>
+<p><a href="https://huggingface.co/dgpmakes/granite-7b-lab-Q4_K_M/resolve/main/granite-7b-lab-Q4_K_M.gguf">Modelo sin entrenar: GRANITE-7B-LAB-Q4_K_M</a></p>
 </li>
 <li>
 <p><a href="https://huggingface.co/dgpmakes/ggml-ilab-pretrained-Q4_K_M/resolve/main/ggml-ilab-pretrained-Q4_K_M.gguf">Modelo entrenado: GGML-ILAB-PRETRAINED-Q4_K_M</a></p>
@@ -224,10 +224,10 @@ source venv/bin/activate</code></pre>
 </ul>
 </div>
 <div class="paragraph">
-<p>Usaremos el modelo Granite-7B-LAB-Q4, una versión cuantificada del modelo Granite-7B-LAB que es compatible con llama.cpp y afinado usando la metodología LAB. El primer modelo no está entrenado mientras que el segundo sí.</p>
+<p>Usaremos el modelo Granite-7B-LAB-Q4, una versión cuantificada del modelo Granite-7B-LAB que es compatible con llama.cpp y ha sido afinado usando la metodología LAB. El primer modelo no está entrenado mientras que el segundo sí.</p>
 </div>
 <div class="paragraph">
-<p>Debemos mover los modelos a sus respectivos directorios:</p>
+<p>Debemos mover los modelos a su directorio específico:</p>
 </div>
 <div class="tabset is-loading">
 <div class="ulist tabs">
@@ -517,7 +517,7 @@ Las taxonomías son archivos YAML que contienen conocimientos y habilidades que 
 <p>Entrenar lleva <strong>varias horas</strong> y por cuestión de tiempo, vamos a comprobar el aprendizaje usando el modelo preentrenado.¡Como si fuera un programa de cocina!</p>
 </div>
 <div class="paragraph">
-<p>En el entrenamiento, un modelo maestro usa la taxonomía que hemos definido para generar más ejemplos de preguntas y respuestas. Después, entrenaremos al modelo con ellos. Cuantas más preguntas y respuestas, más sólido será el entrenamiento. El resultado será un nuevo modelo que comprenda el conocimiento que le hemos indicado.</p>
+<p>En el entrenamiento, un modelo maestro usa la taxonomía que hemos definido para generar más ejemplos de preguntas y respuestas. Después, entrenaremos al modelo con ellos. Cuantas más preguntas y respuestas, más sólido será el entrenamiento. El resultado será un nuevo modelo que comprenda el conocimiento que hemos indicado. Para más información sobre el entrenamiento, visita este <a href="https://github.com/instructlab/instructlab?tab=readme-ov-file#-creating-new-knowledge-or-skills-and-training-the-model">link</a>.</p>
 </div>
 </div>
 </div>
