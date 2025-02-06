@@ -20,7 +20,7 @@ InstructLab se encarga de generar nuevas preguntas y respuestas a partir de la t
 
 En este laboratorio, vamos a:
 
-1. *Interactuar con un modelo*. Iniciaremos InstructLab y interactuaremos mediante un chat.
+1. *Interactuar con un modelo*. Iniciaremos InstructLab e interactuaremos mediante un chat.
 2. *Entrenar un modelo*. Usaremos el potencial de InstructLab, las taxonomías.
 3. *Comprobar modelo entrenado*. Chatearemos con el modelo entrenado para ver los resultados.
 
