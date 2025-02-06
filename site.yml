@@ -3,7 +3,7 @@ runtime:
 
 site:
   title: InstructLab from the start
-  url: https://github.com/rhcs-workshops/summit-connect-madrid-ilab
+  url: https://github.com/dgpmakes/instructlab-start
   start_page: instructlab::index.adoc
 
 content:
