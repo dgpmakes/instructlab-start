@@ -1,0 +1,212 @@
+---
+version: 3
+created_by: instructlab-team
+domain: instructlab
+seed_examples:
+  - context: |
+      InstructLab is a model-agnostic open source AI project that facilitates
+      contributions to Large Language Models (LLMs).
+      We are on a mission to let anyone shape generative
+      AI by enabling contributed updates to existing
+      LLMs in an accessible way. Our community welcomes all those who
+      would like to help us enable everyone to shape
+      the future of generative AI.
+    questions_and_answers:
+      - question: |
+          What is InstructLab?
+        answer: |
+          InstructLab is an open source AI project
+          that faciliates contributions to Large Language Models (LLMs).
+      - question: |
+          Can anyone contribute to InstructLab?
+        answer: |
+          Yes, the community welcomes everyone
+          interested in generative AI.
+      - question: |
+          What is the mission of InstructLab?
+        answer: |
+          We are on a mission to let anyone
+          shape generative AI by enabling contributed
+          updates to existing LLMs in an accessible way.
+          Our community welcomes all those who
+          would like to help us enable everyone
+          to shape the future of generative AI.
+  - context: |
+      There are many projects rapidly embracing
+      and extending permissively licensed AI models,
+      but they are faced with three main challenges:
+      contribution to LLMs is not possible directly.
+      They show up as forks, which forces consumers
+      to choose a "best-fit" model that isn't easily extensible.
+      Also, the forks are expensive for model
+      creators to maintain.
+      The ability to contribute ideas is limited
+      by a lack of AI/ML expertise. One has to learn how
+      to fork, train, and refine models to
+      see their idea move forward. This is a high
+      barrier to entry. There is no direct
+      community governance or best practice around
+      review, curation, and distribution of forked models.
+      InstructLab is here to solve these problems.
+    questions_and_answers:
+      - question: |
+          What are some challenges of contributing
+          to or extending existing open LLMs?
+        answer: |
+          First, you cannot contribute directly,
+          they show up as forks, which forces consumers
+          to choose a "best-fit" model that isn't easily extensible.
+          Secondly, the ability to contribute is
+          limited by the lack of AI/ML expertise.
+      - question: |
+          What makes it hard to contribute changes to AI models?
+        answer: |
+          The lack of AI/ML expertise creates a high barrier to entry.
+      - question: |
+          What problems is Instructlab aiming to solve?
+        answer: |
+          There are many projects rapidly embracing and extending
+          permissively licensed AI models, but they are faced with three
+          main challenges like Contribution to LLMs is not possible directly.
+          They show up as forks, which forces consumers to choose a “best-fit”
+          model that is not easily extensible. Also, the forks are expensive
+          for model creators to maintain. The ability to contribute ideas is
+          limited by a lack of AI/ML expertise. One has to learn how to fork,
+          train, and refine models to see their idea move forward.
+          This is a high barrier to entry. There is no direct community
+          governance or best practice around review, curation, and
+          distribution of forked models.
+  - context: |
+      Check out the [Community README]
+      (https://github.com/instructlab/community/blob/main/README.md)
+      to get started with using and contributing
+      to the project. You may wish to read through the
+      [project's FAQ]
+      (https://github.com/instructlab/community/blob/main/FAQ.md)
+      to get more familiar
+      with all aspects of InstructLab.
+      If you want to jump right in, head to the
+      [`ilab` documentation]
+      (https://github.com/instructlab/instructlab/blob/main/README.md)
+      to get InstructLab set up and running.
+      Learn more about the [skills and knowledge]
+      (https://github.com/instructlab/taxonomy/blob/main/README.md)
+      you can add to models.
+      You can find all the ways to collaborate with
+      project maintainers and your fellow users
+      of InstructLab beyond GitHub by visiting
+      our [project collaboration]
+      (https://github.com/instructlab/community/blob/main/Collaboration.md)
+      page. When you are ready to make a contribution to the project,
+      please take a few minutes to look over our
+      [contribution guidelines]
+      (https://github.com/instructlab/community/blob/main/CONTRIBUTING.md)
+      to ensure your contribution is aligned with the project policies.
+    questions_and_answers:
+      - question: |
+          How can I learn more about contributing to the project?
+        answer: |
+          Check out the [Community README]
+          (https://github.com/instructlab/community/blob/main/README.md)
+          to get started with using and contributing
+          to the project. You may wish to read through the
+          [project's FAQ]
+          (https://github.com/instructlab/community/blob/main/FAQ.md)
+          to get more familiar
+          with all aspects of InstructLab.
+      - question: |
+          How do I set up InstructLab?
+        answer: |
+          If you want to jump right in, head to the
+          [`ilab` documentation]
+          (https://github.com/instructlab/instructlab/blob/main/README.md)
+          to get InstructLab set up and running.
+      - question: |
+          I'm ready to contribute to the project.
+        answer: |
+          When you are ready to make a contribution to the project,
+          please take a few minutes to look
+          over our [contribution guidelines]
+          (https://github.com/instructlab/community/blob/main/CONTRIBUTING.md)
+          You can find all the ways to collaborate
+          with project maintainers and your fellow
+          users of InstructLab beyond GitHub by visiting
+          our [project collaboration]
+          (https://github.com/instructlab/
+          community/blob/main/Collaboration.md) page.
+  - context: |
+      For folks getting started with all things
+      InstructLab, it may be easiest for you
+      to join one of our community meetings
+      and speak with project maintainers
+      and other InstructLab collaborators live.
+      You can find details on all of our community meetings,
+      including our open office hours each Thursday,
+      in our detailed [Project Meetings documentation]
+      (https://github.com/instructlab/community/blob/main/Collaboration.md#project-meetings).
+      Everyone is welcome and encouraged to
+      attend if they will find value in joining.
+      Please note that some meetings are recorded and the recordings
+      [published in our project YouTube channel]
+      (https:// www.youtube.com/@InstructLab/playlists).
+      The meeting host will advise all attendees
+      if the meeting is being recorded. If you
+      prefer to join camera off or dial in via phone
+      so as to not be actively recorded and/or you
+      prefer not to be on camera during meetings, that is absolutely no
+      problem.
+    questions_and_answers:
+      - question: |
+          How can I get involved in the community?
+        answer: |
+          You can join our community meetings.
+          You can find details on all of our community meetings,
+          including our open office hours each
+          Thursday, in our detailed [Project Meetings documentation]
+          (https://github.com/instructlab/community/blob/main/Collaboration.md#project-meetings).
+      - question: |
+          What is an easy way to get involved?
+        answer: |
+          For folks getting started with all things InstructLab,
+          it may be easiest for you to join one of our community meetings
+          and speak with project maintainers
+          and other InstructLab collaborators live.
+      - question: |
+          How can I interact with other InstructLab community members?
+        answer: |
+          You can join our community meetings or office hours.
+          You can find more details in our [Project Meetings documentation]
+          (https://github.com/instructlab/community/blob/main/Collaboration.md#project-meetings).
+  - context: |
+      InstructLab uses a novel synthetic data-based alignment
+      tuning method for Large Language Models (LLMs.)
+      The "lab" in InstructLab stands for [**L**arge-Scale
+      **A**lignment for Chat**B**ots](https://arxiv.org/abs/2403.01081).
+      The InstructLab project is sponsored by Red Hat.
+      InstructLab was originally created by engineers
+      from Red Hat and IBM Research.
+      The infrastructure used to regularly train models
+      based on new contributions from the
+      community is donated and maintained by IBM.
+    questions_and_answers:
+      - question: |
+          Who created InstructLab?
+        answer: |
+          InstructLab was created by engineers
+          from Red Hat and IBM Research.
+      - question: |
+          How does InstructLab fine-tune LLMs?
+        answer: |
+          InstructLab uses a novel synthetic data-based alignment
+          tuning method for Large Language Models (LLMs).
+      - question: |
+          What is the LAB method?
+        answer: |
+          The LAB method stands for Large-Scale Alignment for ChatBots.
+document_outline: |
+  Details on the InstructLab community project.
+document:
+  repo: https://github.com/rhai-code/instructlab_knowledge
+  commit: a454cdb34c37968fc02f15faf1441f7e2eec44e6
+  patterns:
+    - instructlab.md

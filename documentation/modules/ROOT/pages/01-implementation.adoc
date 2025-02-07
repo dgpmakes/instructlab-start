@@ -7,19 +7,119 @@
 
 Para utilizar InstructLab, debemos de cumplir con estos requisitos:
 
-* Un Mac con procesador M1, M2, M3 o un sistema Linux (esta demo se ha comprobado con Fedora).
+* Un sistema Linux (esta demo se ha comprobado con Fedora).
 * Python 3.10 o 3.11. Las versiones superiores no están soportadas a día de hoy.
 * Un mínimo de 250GB de espacio en el disco.
 * Compilador de C + + (gcc gcc- c + + ).
 
+Antes de comenzar, verificamos que tenemos una versión de Python compatible:
 
+[.console-input]
+[source,bash]
+----
+python3.11 --version
+----
+
+En el caso de que no, instalamos Python3.11 dependiendo de nuestro OS:
+
+[tabs]
+====
+Fedora/RHEL::
++
+--
+[.console-input]
+[source,bash]
+----
+sudo dnf install python3.11
+----
+--
+Debian/Ubuntu::
++
+--
+[.console-input]
+[source,bash]
+----
+sudo add-apt-repository ppa:deadsnakes/ppa
+sudo apt update
+sudo apt install python3.11
+----
+--
+MacOS::
++
+--
+Verificamos que Brew está instalado e instalamos Python.
+[.console-input]
+[source,bash]
+----
+brew --version
+brew install python@3.11
+----
+
+
+Si Brew no está instalado, también procedemos a instalarlo.
+
+[.console-input]
+[source,bash]
+----
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+brew install python@3.11
+----
+--
+====
+
+También verificamos que disponemos de un compilador de C y C + +.
+
+[.console-input]
+[source,bash]
+----
+gcc --version
+g++ --version
+make --version
+----
+
+En el caso de que no, instalamos las herramientas de los compiladores según nuestro OS.
+
+[tabs]
+====
+Fedora/RHEL::
++
+--
+[.console-input]
+[source,bash]
+----
+sudo dnf install gcc gcc-c++ make
+----
+--
+Debian/Ubuntu::
++
+--
+[.console-input]
+[source,bash]
+----
+sudo apt update
+sudo apt install -y build-essential gcc g++ make
+----
+--
+MacOS::
++
+--
+Teniendo Brew instalado:
+[.console-input]
+[source,bash]
+----
+brew install gcc make
+----
+====
+
+
+=== Configuración de InstructLab
 
 Comenzamos en el directorio del repositorio llamado #ilab#. Vamos a establecer un entorno virtual de Python para usar el CLI de InstructLab.
 
 [.console-input]
 [source,bash]
 ----
-python -m venv venv
+python3.11 -m venv venv
 source venv/bin/activate
 ----
 
@@ -31,12 +131,11 @@ El siguiente paso será instalar la línea de comandos de InstructLab.
 pip install instructlab
 ----
 
-¡Perfecto! Ya podemos usar InstructLab con el comando `ilab`. Para empezar a trabajar, InstructLab necesita *inicializar* para trabajar con los modelos. El comando `ilab config init` se encarga de crear:
+¡Perfecto! Ya podemos usar InstructLab con el comando `ilab`. Para empezar a trabajar, InstructLab necesita *inicializar* para trabajar con los modelos. El comando `ilab config init` se encarga de:
 
-* Una taxonomía inicial (estructura de conocimientos y habilidades).
-* El archivo de configuración (config.yaml).
-
-El archivo *config.yaml* contiene los valores predeterminados que nos permiten ajustar el comportamiento del modelo a nuestro gusto, como el número de CPUs.
+* Crear una estructura de directorios para los modelos, taxonomía, datos generados, etc..
+* Establecer una configuración y taxonomía inicial (estructura de conocimientos y habilidades).
+* Detectar la CPU y GPU de nuestro sistema.
 
 [.console-input]
 [source,bash]
@@ -56,82 +155,44 @@ Path to taxonomy repo [taxonomy]:
 -> Pulsa la tecla Y, después ENTER
 ----
 
-El resultado final de ejecutar el comando es:
+En caso de que no se detecte la CPU, nos pedirá información acerca de él. El resultado final de ejecutar el comando es:
 
 [source,bash]
 ----
 'Initialization completed successfully, you`re ready to start using ilab. Enjoy!'
 ----
 
-
-* Si trabajamos con Mac OS, debería generarse en el mismo directorio un archivo config.yaml y un directorio conteniendo una taxonomía por defecto.
-* Si trabajamos con Linux, se generaran estos directorios:
+Al terminar, se generaran los directorios necesarios para trabajar con InstructLab.
 
 image::directories.png[]
 
 === Descargar modelos
 
-Estamos listos para entrenar pero nos faltan los modelos. Vamos a descargar estos dos:
+Estamos listos para entrenar pero nos faltan los modelos. Clica en estos 2 links para descargarlos:
 
-* link:https://huggingface.co/dgpmakes/granite-7b-lab-Q4_K_M/resolve/main/granite-7b-lab-Q4_K_M.gguf[Modelo sin entrenar: GRANITE-7B-LAB-Q4_K_M]
+* link:https://huggingface.co/dgpmakes/granite-7b-lab-Q4_K_M/resolve/main/granite-7b-lab-Q4_K_M.gguf[Modelo sin entrenar: Granite-7B-LAB-Q4_K_M]
 * link:https://huggingface.co/dgpmakes/ggml-ilab-pretrained-Q4_K_M/resolve/main/ggml-ilab-pretrained-Q4_K_M.gguf[Modelo entrenado: GGML-ILAB-PRETRAINED-Q4_K_M]
 
 Usaremos el modelo Granite-7B-LAB-Q4, una versión cuantificada del modelo Granite-7B-LAB que es compatible con llama.cpp y ha sido afinado usando la metodología LAB. El primer modelo no está entrenado mientras que el segundo sí.
 
-Debemos mover los modelos a su directorio específico:
+Movemos los modelos a su directorio específico:
 
-[tabs]
-====
-Linux::
-+
---
 [.console-input]
 [source,bash]
 ----
 mv ~/Downloads/granite-7b-lab-Q4_K_M.gguf ~/.cache/instructlab/models/
 mv ~/Downloads/ggml-ilab-pretrained-Q4_K_M.gguf ~/.cache/instructlab/models/
 ----
---
-Mac::
-+
---
-[.console-input]
-[source,bash]
-----
-mkdir -p ~/ilab/models
-mv ~/Downloads/granite-7b-lab-Q4_K_M.gguf ~/ilab/models
-mv ~/Downloads/ggml-ilab-pretrained-Q4_K_M.gguf ~/ilab/models
-----
---
-====
-
-
 
 === Servir modelo
 
 Para poder chatear con el modelo, primero necesitamos servirlo. En el mismo terminal, ejecutamos:
 
-[tabs]
-====
-Linux::
-+
---
 [.console-input]
 [source,bash]
 ----
 ilab model serve --model-path ~/.cache/instructlab/models/granite-7b-lab-Q4_K_M.gguf
 ----
---
-Mac::
-+
---
-[.console-input]
-[source,bash]
-----
-ilab model serve --model-path models/granite-7b-lab-Q4_K_M.gguf
-----
---
-====
 
 Esperamos a que el terminal muestre el siguiente mensaje:
 
@@ -146,30 +207,12 @@ INFO ... After application startup complete see http://127.0.0.1:8000/docs for A
 
 Dejamos el modelo sirviéndose en el terminal donde hemos trabajado y abriremos #un segundo terminal# en el directorio ilab. Volvemos a activar el entorno virtual de Python, pero esta vez iniciamos una sesión de chat con el comando `ilab model chat`.
 
-[tabs]
-====
-Linux::
-+
---
 [.console-input]
 [source,bash]
 ----
 source venv/bin/activate
 ilab model chat -m ~/.cache/instructlab/models/granite-7b-lab-Q4_K_M.gguf
 ----
---
-Mac::
-+
---
-[.console-input]
-[source,bash]
-----
-source venv/bin/activate
-ilab model chat -m models/granite-7b-lab-Q4_K_M.gguf
-----
---
-====
-
 
 En tu terminal debería aparecer:
 
@@ -212,7 +255,7 @@ exit
 [#entrenamiento]
 == 2. Entrenamiento del Modelo
 
-Una vez que conocemos un poco acerca de IntructLab, vamos a usar su potencial, centrándonos en *mejorar la taxonomía*. Añadiremos conocimiento sobre InstructLab al modelo para que sepa más del proyecto y pueda responder a nuestras preguntas. 
+Hemos probado a chatear con el modelo y ahora vamos a aprovechar el potencial de InstructLab, centrándonos en *mejorar la taxonomía*. Añadiremos conocimiento sobre InstructLab al modelo para que sepa más del proyecto y pueda responder a nuestras preguntas. 
 
 === Entender la taxonomía
 
@@ -225,7 +268,7 @@ Echémosle un ojo a la taxonomía actual.
 
 [source,bash]
 ----
-taxonomy/
+~/.local/share/instructlab/taxonomy/
 ├── CODE_OF_CONDUCT.md
 ├── compositional_skills
 │   ├── arts
@@ -239,27 +282,13 @@ taxonomy/
 
 Vemos que la taxonomía incluye conocimiento sobre artes, ingeniería, geografía... Vamos a crear un directorio en el que insertar el conocimiento sobre InstructLab. En el mismo terminal, introducimos el siguiente comando:
 
-[tabs]
-====
-Linux::
-+
---
+
 [.console-input]
 [source,bash]
 ----
 mkdir -p ~/.local/share/instructlab/taxonomy/knowledge/instructlab/overview
 ----
---
-Mac::
-+
---
-[.console-input]
-[source,bash]
-----
-mkdir -p taxonomy/knowledge/instructlab/overview
-----
---
-====
+
 
 En el directorio ilab, ya hay preparado un archivo *qna.yaml*. InstructLab usa estos archivos para enseñar a los modelos. Estos contienen preguntas y respuestas sobre algo en concreto. Aquí tienes un ejemplo:
 
@@ -272,32 +301,15 @@ En el directorio ilab, ya hay preparado un archivo *qna.yaml*. InstructLab usa e
   question: 'What is the mission of Instructlab?'
 ----
 
-Tenemos ya un archivo *qna.yaml* preparado en el directorio ilab. ¡Vamos a incluirlo en el directorio que hemos creado!
+Ahora vamos a incluir las preguntas y respuestas en el directorio que hemos creado.
 
-[tabs]
-====
-Linux::
-+
---
 [.console-input]
 [source,bash]
 ----
-cp qna.yml ~/.local/share/instructlab/taxonomy/knowledge/instructlab/overview
+cp qna.yaml ~/.local/share/instructlab/taxonomy/knowledge/instructlab/overview
 ----
---
-Mac::
-+
---
-[.console-input]
-[source,bash]
-----
-cp qna.yml taxonomy/knowledge/instructlab/overview
-----
---
-====
 
-
-Para comprobar que hemos modificado correctamente la taxonomía, escribe el siguiente comando:
+Para comprobar que la sintaxis del *qna.yaml* es correcta, escribe el siguiente comando:
 
 [.console-input]
 [source,bash]
@@ -312,13 +324,15 @@ Deberías obtener lo siguiente:
 Taxonomy in /taxonomy/ is valid :)
 ----
 
-¡Perfecto! Tenemos todo listo para entrenar.
 
 === Entrenar modelo
 
-Entrenar lleva *varias horas* y por cuestión de tiempo, vamos a comprobar el aprendizaje usando el modelo preentrenado.¡Como si fuera un programa de cocina!
+¡Perfecto! Hemos añadido nuevo conocimiento en la taxonomía. El siguiente paso es generar los datos sintéticos.
 
-En el entrenamiento, un modelo maestro usa la taxonomía que hemos definido para generar más ejemplos de preguntas y respuestas. Después, entrenaremos al modelo con ellos. Cuantas más preguntas y respuestas, más sólido será el entrenamiento. El resultado será un nuevo modelo que comprenda el conocimiento que hemos indicado. Para más información sobre el entrenamiento, visita este link:https://github.com/instructlab/instructlab?tab=readme-ov-file#-creating-new-knowledge-or-skills-and-training-the-model[link].
+Un modelo maestro usará la taxonomía que hemos definido para generar más ejemplos de preguntas y respuestas. Cuantas más preguntas y respuestas tengamos, más sólido será el entrenamiento. Finalmente, entrenamos al modelo con nuestra taxonomía y los datos sintéticos.
+El resultado será un nuevo modelo que comprenda el conocimiento que hemos indicado. Para más información sobre el entrenamiento, visita este link:https://github.com/instructlab/instructlab?tab=readme-ov-file#-creating-new-knowledge-or-skills-and-training-the-model[link].
+
+Generar datos sintéticos y entrenar lleva *varias horas* y por cuestión de tiempo, vamos a comprobar el aprendizaje usando el modelo preentrenado. ¡Como si fuera un programa de cocina!
 
 [#interaccion]
 == 3. Comprobar modelo entrenado
@@ -334,54 +348,20 @@ Aborted!
 
 Luego, servimos el modelo preentrenado:
 
-[tabs]
-====
-Linux::
-+
---
 [.console-input]
 [source,bash]
 ----
 ilab model serve --model-path ~/.cache/instructlab/models/ggml-ilab-pretrained-Q4_K_M.gguf
 ----
---
-Mac::
-+
---
-[.console-input]
-[source,bash]
-----
-ilab model serve --model-path models/ggml-ilab-pretrained-Q4_K_M.gguf
-----
---
-====
 
 Esperamos unos segundos, volvemos al segundo terminal e iniciamos el chat con el LLM.
 
 
-
-[tabs]
-====
-Linux::
-+
---
 [.console-input]
 [source,bash]
 ----
 ilab model chat -m ~/.cache/instructlab/models/ggml-ilab-pretrained-Q4_K_M.gguf
 ----
---
-Mac::
-+
---
-[.console-input]
-[source,bash]
-----
-ilab model chat --greedy-mode -m models/ggml-ilab-pretrained-Q4_K_M.gguf
-----
---
-====
-
 
 ¡Llega la hora de la verdad! Prueba a preguntar al LLM sobre InstructLab:
 
@@ -393,7 +373,7 @@ Can you give me a short summary of what InstructLab is?
 
 ¡Yuju! La respuesta debería ser mucho mejor que la última vez. El LLM debe ser capaz de explicar que InstructLab.
 
-== Conclusión
+=== Conclusión
 
 *¡Laboratorio terminado con éxito!* Esperamos que hayas disfrutado probando de primera mano el potencial de InstructLab. Como pequeño repaso, has conseguido lo siguiente:
 
@@ -401,6 +381,6 @@ Can you give me a short summary of what InstructLab is?
 * Modificar la taxonomía de InstructLab
 * Comprobar el desempeño del modelo entrenado
 
-Gracias por haber dedicado tu esfuerzo y tiempo en a aprender más sobre inteligencia articial y LLMs. Para más información sobre InstructLab, ¡echa un ojo a la comunidad en Github! https://github.com/instructlab
+Gracias por haber dedicado tu esfuerzo y tiempo a aprender más sobre inteligencia articial y LLMs. Para más información sobre InstructLab, ¡echa un ojo a la comunidad en Github! https://github.com/instructlab
 
 
