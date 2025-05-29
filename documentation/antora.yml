@@ -1,5 +1,5 @@
-name: instructlab
-title: InstructLab
+name: company
+title: Company
 version: master
 nav:
   - modules/ROOT/nav.adoc
