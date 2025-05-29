@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Untitled :: InstructLab from the start</title>
+    <link rel="canonical" href="https://github.com/dgpmakes/instructlab-start/company/02-annex.html">
+    <link rel="prev" href="01-implementation.html">
+    <meta name="generator" content="Antora 3.0.0">
+    <link rel="stylesheet" href="../_/css/site.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img src="../_/img/RHDLogo.svg" height="40px" alt="Red Hat Developer Program"></a>
+      <a class="navbar-item" style="font-size: 24px; color: white" href="https://github.com/dgpmakes/instructlab-start">InstructLab from the start</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://developers.redhat.com/ebooks/" target="_blank">Books</a>
+        <a class="navbar-item" href="https://developers.redhat.com/cheatsheets/" target="_blank">Cheat Sheets</a>
+        <a class="navbar-item" href="https://developers.redhat.com/events/" target="_blank">Upcoming Events</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">More Tutorials</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/kubernetes-tutorial/" target="_blank">Kubernetes</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/istio-tutorial/" target="_blank">Istio</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/quarkus-tutorial/" target="_blank">Quarkus</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/knative-tutorial/" target="_blank">Knative</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/tekton-tutorial/" target="_blank">Tekton</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="company" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html"></a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="index.html#instructlab">¿Qué es InstructLab?</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="index.html#objetivos">Objetivos</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="01-implementation.html">Laboratorio</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="01-implementation.html#uso-basico">1. Interactuar con un modelo</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="01-implementation.html#entrenamiento">2. Entrenar modelo</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="01-implementation.html#interaccion">3. Comprobar modelo entrenado</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="02-annex.html">Anexo</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#que-es-un-llm">¿Qué es un LLM?</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#como-entrenar-llm">¿Cómo se entrenan los LLM?</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#relacion-instructlab">¿Cómo se relaciona con InstructLab?</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">Company</a></li>
+    <li><a href="02-annex.html">Anexo</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/dgpmakes/instructlab-start/edit/master/documentation/modules/ROOT/pages/02-annex.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<article class="doc">
+<div class="sect1">
+<h2 id="_introducción_al_laboratorio"><a class="anchor" href="#_introducción_al_laboratorio"></a>Introducción al Laboratorio</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Durante este laboratorio, aprenderás cómo entrenar un Modelo de Lenguaje Grande (LLM) con generación de datos sintéticos mediante InstructLab.</p>
+</div>
+<div class="sect2">
+<h3 id="que-es-un-llm"><a class="anchor" href="#que-es-un-llm"></a>¿Qué es un LLM?</h3>
+<div class="paragraph">
+<p>Un LLM es un modelo de inteligencia artificial que usa aprendizaje profundo para generar texto similar al humano. Estos modelos aprenden patrones del lenguaje a partir de grandes cantidades de datos y se utilizan para tareas de procesamiento de lenguaje natural, como pueden ser traducciones o sintésis de textos.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="como-entrenar-llm"><a class="anchor" href="#como-entrenar-llm"></a>¿Cómo se entrenan los LLM?</h3>
+<div class="paragraph">
+<p>Los LLM se entrenan con técnicas de aprendizaje profundo en varias fases:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Recolección de datos</strong>: Recolección de texto de diversas fuentes.</p>
+</li>
+<li>
+<p><strong>Preprocesamiento</strong>: Limpieza de datos.</p>
+</li>
+<li>
+<p><strong>Tokenización</strong>: División del texto en unidades manejables.</p>
+</li>
+<li>
+<p><strong>Pre-entrenamiento</strong>: Aprendizaje de patrones.</p>
+</li>
+<li>
+<p><strong>Alineación</strong>: Ajuste del modelo para que cumpla con objetivos humanos.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="relacion-instructlab"><a class="anchor" href="#relacion-instructlab"></a>¿Cómo se relaciona con InstructLab?</h3>
+<div class="paragraph">
+<p>InstructLab usa generación de datos sintéticos para entrenar modelos, reduciendo la dependencia de anotaciones humanas. Es decir, puede hacer uso del LLM para generar datos con los que seguir entrenando el modelo.</p>
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="01-implementation.html">Laboratorio</a></span>
+</nav>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <a class="rhd-logo" href="https://developers.redhat.com" target="_blank"></div>
+</footer>
+<script src="../_/js/vendor/clipboard.js"></script>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

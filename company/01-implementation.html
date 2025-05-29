@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Laboratorio :: InstructLab from the start</title>
+    <link rel="canonical" href="https://github.com/dgpmakes/instructlab-start/company/01-implementation.html">
+    <link rel="prev" href="index.html#instructlab">
+    <link rel="next" href="02-annex.html">
+    <meta name="generator" content="Antora 3.0.0">
+    <link rel="stylesheet" href="../_/css/site.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img src="../_/img/RHDLogo.svg" height="40px" alt="Red Hat Developer Program"></a>
+      <a class="navbar-item" style="font-size: 24px; color: white" href="https://github.com/dgpmakes/instructlab-start">InstructLab from the start</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://developers.redhat.com/ebooks/" target="_blank">Books</a>
+        <a class="navbar-item" href="https://developers.redhat.com/cheatsheets/" target="_blank">Cheat Sheets</a>
+        <a class="navbar-item" href="https://developers.redhat.com/events/" target="_blank">Upcoming Events</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">More Tutorials</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/kubernetes-tutorial/" target="_blank">Kubernetes</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/istio-tutorial/" target="_blank">Istio</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/quarkus-tutorial/" target="_blank">Quarkus</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/knative-tutorial/" target="_blank">Knative</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/tekton-tutorial/" target="_blank">Tekton</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="company" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html"></a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="index.html#instructlab">¿Qué es InstructLab?</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="index.html#objetivos">Objetivos</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="01-implementation.html">Laboratorio</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#uso-basico">1. Interactuar con un modelo</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#entrenamiento">2. Entrenar modelo</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#interaccion">3. Comprobar modelo entrenado</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="02-annex.html">Anexo</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="02-annex.html#que-es-un-llm">¿Qué es un LLM?</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="02-annex.html#como-entrenar-llm">¿Cómo se entrenan los LLM?</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="02-annex.html#relacion-instructlab">¿Cómo se relaciona con InstructLab?</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">Company</a></li>
+    <li><a href="01-implementation.html">Laboratorio</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/dgpmakes/instructlab-start/edit/master/documentation/modules/ROOT/pages/01-implementation.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<article class="doc">
+<h1 class="page">Laboratorio</h1>
+<div class="sect1">
+<h2 id="uso-basico"><a class="anchor" href="#uso-basico"></a>1. Interactuar con un modelo</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_preparación_del_entorno"><a class="anchor" href="#_preparación_del_entorno"></a>Preparación del entorno</h3>
+<div class="paragraph">
+<p>Para utilizar InstructLab, debemos de cumplir con estos requisitos:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Un sistema Linux (esta demo se ha comprobado con Fedora).</p>
+</li>
+<li>
+<p>Python 3.10 o 3.11. Las versiones superiores no están soportadas a día de hoy.</p>
+</li>
+<li>
+<p>Un mínimo de 250GB de espacio en el disco.</p>
+</li>
+<li>
+<p>Compilador de C + + (gcc gcc- c + + ).</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Antes de comenzar, verificamos que tenemos una versión de Python compatible:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">python3.11 --version</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>En el caso de que no, instalamos Python3.11 dependiendo de nuestro OS:</p>
+</div>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset1_fedora-rhel"></a>Fedora/RHEL</p>
+</li>
+<li>
+<p><a id="tabset1_debian-ubuntu"></a>Debian/Ubuntu</p>
+</li>
+<li>
+<p><a id="tabset1_macos"></a>MacOS</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset1_fedora-rhel">
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo dnf install python3.11</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset1_debian-ubuntu">
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo add-apt-repository ppa:deadsnakes/ppa
+sudo apt update
+sudo apt install python3.11</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset1_macos">
+<div class="paragraph">
+<p>Verificamos que Brew está instalado e instalamos Python.</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">brew --version
+brew install python@3.11</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Si Brew no está instalado, también procedemos a instalarlo.</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+brew install python@3.11</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>También verificamos que disponemos de un compilador de C y C + +.</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">gcc --version
+g++ --version
+make --version</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>En el caso de que no, instalamos las herramientas de los compiladores según nuestro OS.</p>
+</div>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset2_fedora-rhel"></a>Fedora/RHEL</p>
+</li>
+<li>
+<p><a id="tabset2_debian-ubuntu"></a>Debian/Ubuntu</p>
+</li>
+<li>
+<p><a id="tabset2_macos"></a>MacOS</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset2_fedora-rhel">
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo dnf install gcc gcc-c++ make</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset2_debian-ubuntu">
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo apt update
+sudo apt install -y build-essential gcc g++ make</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset2_macos">
+<div class="paragraph">
+<p>Teniendo Brew instalado:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">brew install gcc make</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_configuración_de_instructlab"><a class="anchor" href="#_configuración_de_instructlab"></a>Configuración de InstructLab</h3>
+<div class="paragraph">
+<p>Comenzamos en el directorio del repositorio llamado <mark>ilab</mark>. Vamos a establecer un entorno virtual de Python para usar el CLI de InstructLab.</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">python3.11 -m venv venv
+source venv/bin/activate</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>El siguiente paso será instalar la línea de comandos de InstructLab.</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">pip install instructlab</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>¡Perfecto! Ya podemos usar InstructLab con el comando <code>ilab</code>. Para empezar a trabajar, InstructLab necesita <strong>inicializar</strong> para trabajar con los modelos. El comando <code>ilab config init</code> se encarga de:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Crear una estructura de directorios para los modelos, taxonomía, datos generados, etc..</p>
+</li>
+<li>
+<p>Establecer una configuración y taxonomía inicial (estructura de conocimientos y habilidades).</p>
+</li>
+<li>
+<p>Detectar la CPU y GPU de nuestro sistema.</p>
+</li>
+</ul>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">ilab config init</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">Path to taxonomy repo [taxonomy]:
+-&gt; Pulsa la tecla ENTER</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">'taxonomy' seems to not exist or is empty. Should I clone?
+-&gt; Pulsa la tecla Y, después ENTER</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>En caso de que no se detecte la CPU, nos pedirá información acerca de él. El resultado final de ejecutar el comando es:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">'Initialization completed successfully, you`re ready to start using ilab. Enjoy!'</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Al terminar, se generaran los directorios necesarios para trabajar con InstructLab.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/directories.png" alt="directories">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_descargar_modelos"><a class="anchor" href="#_descargar_modelos"></a>Descargar modelos</h3>
+<div class="paragraph">
+<p>Estamos listos para entrenar pero nos faltan los modelos. Clica en estos 2 links para descargarlos:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://huggingface.co/dgpmakes/granite-7b-lab-Q4_K_M/resolve/main/granite-7b-lab-Q4_K_M.gguf">Modelo sin entrenar: Granite-7B-LAB-Q4_K_M</a></p>
+</li>
+<li>
+<p><a href="https://huggingface.co/dgpmakes/ggml-ilab-pretrained-Q4_K_M/resolve/main/ggml-ilab-pretrained-Q4_K_M.gguf">Modelo entrenado: GGML-ILAB-PRETRAINED-Q4_K_M</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Usaremos el modelo Granite-7B-LAB-Q4, una versión cuantificada del modelo Granite-7B-LAB que es compatible con llama.cpp y ha sido afinado usando la metodología LAB. El primer modelo no está entrenado mientras que el segundo sí.</p>
+</div>
+<div class="paragraph">
+<p>Movemos los modelos a su directorio específico:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">mv ~/Downloads/granite-7b-lab-Q4_K_M.gguf ~/.cache/instructlab/models/
+mv ~/Downloads/ggml-ilab-pretrained-Q4_K_M.gguf ~/.cache/instructlab/models/</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_servir_modelo"><a class="anchor" href="#_servir_modelo"></a>Servir modelo</h3>
+<div class="paragraph">
+<p>Para poder chatear con el modelo, primero necesitamos servirlo. En el mismo terminal, ejecutamos:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">ilab model serve --model-path ~/.cache/instructlab/models/granite-7b-lab-Q4_K_M.gguf</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Esperamos a que el terminal muestre el siguiente mensaje:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">INFO ... After application startup complete see http://127.0.0.1:8000/docs for API.</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>¡Genial! Estamos listos para probar el LLM.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_chatear_con_el_modelo"><a class="anchor" href="#_chatear_con_el_modelo"></a>Chatear con el modelo</h3>
+<div class="paragraph">
+<p>Dejamos el modelo sirviéndose en el terminal donde hemos trabajado y abriremos <mark>un segundo terminal</mark> en el directorio ilab. Volvemos a activar el entorno virtual de Python, pero esta vez iniciamos una sesión de chat con el comando <code>ilab model chat</code>.</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">source venv/bin/activate
+ilab model chat -m ~/.cache/instructlab/models/granite-7b-lab-Q4_K_M.gguf</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>En tu terminal debería aparecer:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">╭───────────────────────────────────────────────────────────────────────────╮
+│ Welcome to InstructLab Chat w/ MODELS/GRANITE-7B-LAB-Q4_K_M.GGUF
+╰───────────────────────────────────────────────────────────────────────────╯
+&gt;&gt;&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Tenemos todo listo para hacerle preguntas a nuestro LLM. Prueba a escribir:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">Can you give me a short summary of what Openshift is?</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>¡Genial! El modelo responde correctamente y debería explicar que Openshift es una plataforma de contenerización desarrollada por Red Hat.</p>
+</div>
+<div class="paragraph">
+<p>Ahora, prueba a escribir en el chat:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">Can you give me a short summary of what InstructLab is?</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Vaya. El modelo responde que InstructLab es una plataforma educativa, algo que no es cierto y se aleja de la realidad. Este error se suele denominar «<strong>alucinación</strong>» en el mundo de la IA. Para solucionarlo, toca pasar por el entrenamiento. ¡Manos a la obra!</p>
+</div>
+<div class="paragraph">
+<p>Antes de continuar, vamos a cerrar la sesión de chat con el modelo. Escribe 'exit'.</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">exit</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="entrenamiento"><a class="anchor" href="#entrenamiento"></a>2. Entrenamiento del Modelo</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Hemos probado a chatear con el modelo y ahora vamos a aprovechar el potencial de InstructLab, centrándonos en <strong>mejorar la taxonomía</strong>. Añadiremos conocimiento sobre InstructLab al modelo para que sepa más del proyecto y pueda responder a nuestras preguntas.</p>
+</div>
+<div class="sect2">
+<h3 id="_entender_la_taxonomía"><a class="anchor" href="#_entender_la_taxonomía"></a>Entender la taxonomía</h3>
+<div class="paragraph">
+<p>¿Te has preguntado por qué InstructLab se llama así?</p>
+</div>
+<div class="paragraph">
+<p>El <strong>método LAB</strong> (<strong>L</strong>arge-scale <strong>A</strong>lignment for chat<strong>B</strong>ots) se basa en taxonomías.
+Las taxonomías son archivos YAML que contienen conocimientos y habilidades que InstructLab usa para su generación de datos.</p>
+</div>
+<div class="paragraph">
+<p>Echémosle un ojo a la taxonomía actual.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">~/.local/share/instructlab/taxonomy/
+├── CODE_OF_CONDUCT.md
+├── compositional_skills
+│   ├── arts
+│   ├── engineering
+│   ├── geography
+│   ├── grounded
+│   │   ├── arts
+│   │   ├── engineering
+│   │   ├── geography</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Vemos que la taxonomía incluye conocimiento sobre artes, ingeniería, geografía&#8230;&#8203; Vamos a crear un directorio en el que insertar el conocimiento sobre InstructLab. En el mismo terminal, introducimos el siguiente comando:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">mkdir -p ~/.local/share/instructlab/taxonomy/knowledge/instructlab/overview</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>En el directorio ilab, ya hay preparado un archivo <strong>qna.yaml</strong>. InstructLab usa estos archivos para enseñar a los modelos. Estos contienen preguntas y respuestas sobre algo en concreto. Aquí tienes un ejemplo:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">- answer: The mission of instructlab is to let everyone shape generative AI
+    by enabling contributed updates to existing LLMs in an accessible way.
+    The community welcomes all those who would like to help enable everyone
+    to shape the future of generative AI.
+  question: 'What is the mission of Instructlab?'</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Ahora vamos a incluir las preguntas y respuestas en el directorio que hemos creado.</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cp qna.yaml ~/.local/share/instructlab/taxonomy/knowledge/instructlab/overview</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Para comprobar que la sintaxis del <strong>qna.yaml</strong> es correcta, escribe el siguiente comando:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">ilab taxonomy diff</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Deberías obtener lo siguiente:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">Taxonomy in /taxonomy/ is valid :)</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_entrenar_modelo"><a class="anchor" href="#_entrenar_modelo"></a>Entrenar modelo</h3>
+<div class="paragraph">
+<p>¡Perfecto! Hemos añadido nuevo conocimiento en la taxonomía. El siguiente paso es generar los datos sintéticos.</p>
+</div>
+<div class="paragraph">
+<p>Un modelo maestro usará la taxonomía que hemos definido para generar más ejemplos de preguntas y respuestas. Cuantas más preguntas y respuestas tengamos, más sólido será el entrenamiento. Finalmente, entrenamos al modelo con nuestra taxonomía y los datos sintéticos.
+El resultado será un nuevo modelo que comprenda el conocimiento que hemos indicado. Para más información sobre el entrenamiento, visita este <a href="https://github.com/instructlab/instructlab?tab=readme-ov-file#-creating-new-knowledge-or-skills-and-training-the-model">link</a>.</p>
+</div>
+<div class="paragraph">
+<p>Generar datos sintéticos y entrenar lleva <strong>varias horas</strong> y por cuestión de tiempo, vamos a comprobar el aprendizaje usando el modelo preentrenado. ¡Como si fuera un programa de cocina!</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="interaccion"><a class="anchor" href="#interaccion"></a>3. Comprobar modelo entrenado</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>¡Hora de probar el modelo entrenado! Vamos al primer terminal y dejamos de servir el modelo usando <code>CTRL</code>+<code>C</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">INFO 2024-05-06 18:41:08,496 server.py:197 After application startup complete see http://127.0.0.1:8000/docs for API.
+^C
+Aborted!</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Luego, servimos el modelo preentrenado:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">ilab model serve --model-path ~/.cache/instructlab/models/ggml-ilab-pretrained-Q4_K_M.gguf</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Esperamos unos segundos, volvemos al segundo terminal e iniciamos el chat con el LLM.</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">ilab model chat -m ~/.cache/instructlab/models/ggml-ilab-pretrained-Q4_K_M.gguf</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>¡Llega la hora de la verdad! Prueba a preguntar al LLM sobre InstructLab:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">Can you give me a short summary of what InstructLab is?</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>¡Yuju! La respuesta debería ser mucho mejor que la última vez. El LLM debe ser capaz de explicar que InstructLab.</p>
+</div>
+<div class="sect2">
+<h3 id="_conclusión"><a class="anchor" href="#_conclusión"></a>Conclusión</h3>
+<div class="paragraph">
+<p><strong>¡Laboratorio terminado con éxito!</strong> Esperamos que hayas disfrutado probando de primera mano el potencial de InstructLab. Como pequeño repaso, has conseguido lo siguiente:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Chatear con un LLM</p>
+</li>
+<li>
+<p>Modificar la taxonomía de InstructLab</p>
+</li>
+<li>
+<p>Comprobar el desempeño del modelo entrenado</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Gracias por haber dedicado tu esfuerzo y tiempo a aprender más sobre inteligencia articial y LLMs. Para más información sobre InstructLab, ¡echa un ojo a la comunidad en Github! <a href="https://github.com/instructlab" class="bare">https://github.com/instructlab</a></p>
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="index.html#instructlab">¿Qué es InstructLab?</a></span>
+  <span class="next"><a href="02-annex.html">Anexo</a></span>
+</nav>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <a class="rhd-logo" href="https://developers.redhat.com" target="_blank"></div>
+</footer>
+<script src="../_/js/vendor/clipboard.js"></script>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
