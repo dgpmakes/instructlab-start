@@ -1,141 +1,104 @@
 = Laboratorio
 
+[#comprender]
+== 🔍 Comprender el entorno
+
+Echémosle un vistazo al laboratorio. Si aún no lo has hecho, oculta las instrucciones del laboratorio en inglés situando el ratón entre las instrucciones y los terminales y deslizando al máximo a la izquierda. Por comodidad, deja el entorno en la parte derecha de tu pantalla y las instrucciones en español a la izquierda.
+
+En la web del entorno, vemos en la esquina superior izquierda dos pestañas. En "Terminals", veremos un terminal arriba y un terminal abajo. Están conectados a la misma máquina virtual y son idénticos. Por lo general escribiremos en el de arriba, luego en las instrucciones se especifica cuando pasar a abajo.
+
+En la segunda pestaña, leemos "Parasol". Esta es la web de nuestra empresa ficticia que queremos mejorar gracias a nuestro trabajo con InstructLab.
+
+
 [#uso-basico]
 == 1. Interactuar con un modelo
+
+Nuestra primera tarea será ofrecer en nuestra web un chatbot al que hacer preguntas sobre siniestros de coches. ¡Calma! Tenemos toda la interfaz gráfica y un modelo de lenguaje listo para hacerlo. En este caso, usaremos InstructLab para servir un modelo y así hacerle llamadas desde nuestra web.
 
 === Preparación del entorno
 
 Para utilizar InstructLab, debemos de cumplir con estos requisitos:
 
-* Un sistema Linux (esta demo se ha comprobado con Fedora).
-* Python 3.10 o 3.11. Las versiones superiores no están soportadas a día de hoy.
+* Un sistema Linux.
+* Python 3.10 o 3.11.
 * Un mínimo de 250GB de espacio en el disco.
-* Compilador de C + + (gcc gcc- c + + ).
+* Compilador de C + +.
 
-Antes de comenzar, verificamos que tenemos una versión de Python compatible:
+No hay que preocuparse por ello ahora mismo, el laboratorio cumple con todos esos requisitos.
 
-[.console-input]
-[source,bash]
-----
-python3.11 --version
-----
+=== Ejecutar InstructLab
 
-En el caso de que no, instalamos Python3.11 dependiendo de nuestro OS:
+Lo primero que tenemos que hacer es crear un entorno virtual Python que nos permitirá interactuar con la línea de comandos de InstructLab. Escribe los siguientes comandos en el terminal superior:
 
-[tabs]
-====
-Fedora/RHEL::
-+
---
-[.console-input]
-[source,bash]
-----
-sudo dnf install python3.11
-----
---
-Debian/Ubuntu::
-+
---
-[.console-input]
-[source,bash]
-----
-sudo add-apt-repository ppa:deadsnakes/ppa
-sudo apt update
-sudo apt install python3.11
-----
---
-MacOS::
-+
---
-Verificamos que Brew está instalado e instalamos Python.
-[.console-input]
-[source,bash]
-----
-brew --version
-brew install python@3.11
-----
-
-
-Si Brew no está instalado, también procedemos a instalarlo.
+Dirigete hasta la carpeta predefinida InstructLab y activa el entorno virtual python ejecutando los siguientes comandos:
 
 [.console-input]
 [source,bash]
 ----
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-brew install python@3.11
-----
---
-====
-
-También verificamos que disponemos de un compilador de C y C + +.
-
-[.console-input]
-[source,bash]
-----
-gcc --version
-g++ --version
-make --version
-----
-
-En el caso de que no, instalamos las herramientas de los compiladores según nuestro OS.
-
-[tabs]
-====
-Fedora/RHEL::
-+
---
-[.console-input]
-[source,bash]
-----
-sudo dnf install gcc gcc-c++ make
-----
---
-Debian/Ubuntu::
-+
---
-[.console-input]
-[source,bash]
-----
-sudo apt update
-sudo apt install -y build-essential gcc g++ make
-----
---
-MacOS::
-+
---
-Teniendo Brew instalado:
-[.console-input]
-[source,bash]
-----
-brew install gcc make
-----
-====
-
-
-=== Configuración de InstructLab
-
-Comenzamos en el directorio del repositorio llamado #ilab#. Vamos a establecer un entorno virtual de Python para usar el CLI de InstructLab.
-
-[.console-input]
-[source,bash]
-----
-python3.11 -m venv venv
+cd ~/instructlab
 source venv/bin/activate
 ----
 
-El siguiente paso será instalar la línea de comandos de InstructLab.
+El terminal debería parecerse a esto:
+
+[source,bash]
+----
+(venv) [instruct@bastion instructlab]$
+----
+
+De esta forma, ya podemos usar InstructLab con el comando `ilab` desde el entorno virtual de Python. Verifícalo con este comando:
 
 [.console-input]
 [source,bash]
 ----
-pip install instructlab
+ilab
 ----
 
-¡Perfecto! Ya podemos usar InstructLab con el comando `ilab`. Para empezar a trabajar, InstructLab necesita *inicializar* para trabajar con los modelos. El comando `ilab config init` se encarga de:
+Deberías obtener esto:
 
-* Crear una estructura de directorios para los modelos, taxonomía, datos generados, etc..
+[source,bash]
+----
+Usage: ilab [OPTIONS] COMMAND [ARGS]...
+
+
+  CLI for interacting with InstructLab.
+
+
+  If this is your first time running ilab, it`s best to start with `ilab config init`
+  to create the environment.
+
+
+Options:
+  --config PATH  Path to a configuration file.  [default: /home/instruct/.config/instructlab/config.yaml]
+  -v, --verbose  Enable debug logging (repeat for even more verbosity)
+  --version      Show the version and exit.
+  --help         Show this message and exit.
+
+Commands:
+  config    Command Group for Interacting with...
+  data      Command Group for Interacting with...
+  model     Command Group for Interacting with...
+  system    Command group for all system-related...
+  taxonomy  Command Group for Interacting with...
+
+Aliases:
+  chat      model chat
+  generate  data generate
+  serve     model serve
+  train     model train
+----
+
+¡Perfecto! Estamos listos para meternos de lleno con InstructLab.
+
+=== Configurar InstructLab
+
+Para empezar a trabajar, InstructLab necesita *inicializar*. El comando `ilab config init` se encarga de:
+
+* Crear una estructura de directorios para los modelos, datos generados, etc..
 * Establecer una configuración y taxonomía inicial (estructura de conocimientos y habilidades).
 * Detectar la CPU y GPU de nuestro sistema.
+
+Introduce el siguiente comando:
 
 [.console-input]
 [source,bash]
@@ -143,78 +106,136 @@ pip install instructlab
 ilab config init
 ----
 
-[source,bash]
-----
-Path to taxonomy repo [taxonomy]:
--> Pulsa la tecla ENTER
-----
+Deberías recibir el siguiente output:
 
 [source,bash]
 ----
-'taxonomy' seems to not exist or is empty. Should I clone?
--> Pulsa la tecla Y, después ENTER
+Welcome to InstructLab CLI. This guide will help you to setup your environment.
+Please provide the following values to initiate the environment [press Enter for defaults]:
+Path to taxonomy repo [/home/instruct/.local/share/instructlab/taxonomy]:
 ----
 
-En caso de que no se detecte la CPU, nos pedirá información acerca de él. El resultado final de ejecutar el comando es:
+En este caso, pulsaremos la tecla ENTER. Eso hará que usemos una taxonomía por defecto. Más adelante explicamos qué son las taxonomías.
+
+El comando continuará y lo siguiente que enseñará es esto:
+
+[source,bash]
+----
+Path to your model [/home/instruct/.cache/instructlab/models/merlinite-7b-lab-Q4_K_M.gguf]:
+Generating 
+/home/instruct/.config/instructlab/config.yaml
+...
+Detecting Hardware...
+We chose Nvidia 1x L4 as your designated training profile. This is for systems with 24 GB of vRAM.
+This profile is the best approximation for your system based off of the amount of vRAM. We modified it to match the number of GPUs you have.
+Is this profile correct? [Y/n]: Y
+----
+
+El comando ha detectado que estamos usando un hardware específico de Nvidia con 24GB de VRAM, así que ha adaptado el funcionamiento de InstructLab para sacar todo el potencial de nuestro sistema.
+
+Ahora, pulsaremos la tecla Y y luego ENTER.
+
+Si todo ha ido bien, el comando terminará avisándonos de que la inicialización ha sido completada con éxito.
 
 [source,bash]
 ----
 'Initialization completed successfully, you`re ready to start using ilab. Enjoy!'
 ----
 
-Al terminar, se generaran los directorios necesarios para trabajar con InstructLab.
+Durante la fase de inicialización pasan varias cosas. Se crea una taxonomía por defecto en el sistema de archivos local y un archivo de configuración (config.yaml) en el directorio “home/instruct/.config/instructlab/”.
 
-image::directories.png[]
+El archivo config.yaml contiene los parámetros por defecto que utilizaremos durante este laboratorio para personalizar el desempeño de InstructLab. Si decides experimentar con InstructLab después del evento, es importante que eches un ojo a este archivo para que puedas ajustar los parámetros a tu gusto.
+
 
 === Descargar modelos
 
-Estamos listos para entrenar pero nos faltan los modelos. Clica en estos 2 links para descargarlos:
+Con el entorno InstructLab configurado, ahora descargaremos dos modelos cuantificados (es decir, comprimidos y optimizados) en el directorio local. Estamos utilizando modelos cuantificados porque disponemos de una única GPU para este laboratorio. Para un mayor rendimiento o casos de uso en producción, se utilizarían modelos sin cuantificar.
 
-* link:https://huggingface.co/dgpmakes/granite-7b-lab-Q4_K_M/resolve/main/granite-7b-lab-Q4_K_M.gguf[Modelo sin entrenar: Granite-7B-LAB-Q4_K_M]
-* link:https://huggingface.co/dgpmakes/ggml-ilab-pretrained-Q4_K_M/resolve/main/ggml-ilab-pretrained-Q4_K_M.gguf[Modelo entrenado: GGML-ILAB-PRETRAINED-Q4_K_M]
+* Granite se utilizará como un servidor de modelos para las solicitudes de la API.
+* Merlinite nos ayudará a crear datos sintéticos para entrenar un nuevo modelo.
 
-Usaremos el modelo Granite-7B-LAB-Q4, una versión cuantificada del modelo Granite-7B-LAB que es compatible con llama.cpp y ha sido afinado usando la metodología LAB. El primer modelo no está entrenado mientras que el segundo sí.
-
-Movemos los modelos a su directorio específico:
+Primero, descargaremos el modelo Granite:
 
 [.console-input]
 [source,bash]
 ----
-mv ~/Downloads/granite-7b-lab-Q4_K_M.gguf ~/.cache/instructlab/models/
-mv ~/Downloads/ggml-ilab-pretrained-Q4_K_M.gguf ~/.cache/instructlab/models/
+ilab model download --repository instructlab/granite-7b-lab-GGUF --filename=granite-7b-lab-Q4_K_M.gguf --hf-token $HUGGINGFACE_RO_TOKEN
 ----
 
-=== Servir modelo
-
-Para poder chatear con el modelo, primero necesitamos servirlo. En el mismo terminal, ejecutamos:
+Y ahora hacemos igual para Merlinite:
 
 [.console-input]
 [source,bash]
 ----
-ilab model serve --model-path ~/.cache/instructlab/models/granite-7b-lab-Q4_K_M.gguf
+ilab model download --repository instructlab/merlinite-7b-lab-GGUF --filename=merlinite-7b-lab-Q4_K_M.gguf --hf-token $HUGGINGFACE_RO_TOKEN
 ----
 
-Esperamos a que el terminal muestre el siguiente mensaje:
+Como puedes ver, el comando ilab model download descarga los modelos desde el repositorio oficial de InstructLab en HuggingFace. 
+
+El output después de descargar cada modelo debe parecese a esto:
+
+[source,bash]
+----
+Downloading model from Hugging Face: instructlab/granite-7b-lab-GGUF@main to /home/instruct/.cache/instructlab/models...
+Downloading 'granite-7b-lab-Q4_K_M.gguf' to '/home/instruct/.cache/instructlab/models/.cache/huggingface/download/granite-7b-lab-Q4_K_M.gguf.6adeaad8c048b35ea54562c55e454cc32c63118a32c7b8152cf706b290611487.incomplete'
+INFO 2024-09-10 16:51:32,740 huggingface_hub.file_download:1908: Downloading 'granite-7b-lab-Q4_K_M.gguf' to '/home/instruct/.cache/instructlab/models/.cache/huggingface/download/granite-7b-lab-Q4_K_M.gguf.6adeaad8c048b35ea54562c55e454cc32c63118a32c7b8152cf706b290611487.incomplete'
+granite-7b-lab-Q4_K_M.gguf: 100%|█| 4.08G/4.08G [00:19<00:00, 207
+Download complete. Moving file to /home/instruct/.cache/instructlab/models/granite-7b-lab-Q4_K_M.gguf
+INFO 2024-09-10 16:51:52,562 huggingface_hub.file_download:1924: Download complete. Moving file to /home/instruct/.cache/instructlab/models/granite-7b-lab-Q4_K_M.gguf
+----
+
+Ahora que los modelos están descargados, podemos servir y chatear con el modelo Granite. Servir el modelo simplemente significa que vamos a ejecutar un servidor que permitirá a otras herramientas interactuar de forma similar a hacer una llamada a la API.
+
+=== Servir un modelo
+
+Vamos a servir el modelo Granite con el siguiente comando:
+
+[.console-input]
+[source,bash]
+----
+ilab model serve --model-path /home/instruct/.cache/instructlab/models/granite-7b-lab-Q4_K_M.gguf
+----
+
+Como puede ver, el comando serve puede tomar un argumento opcional --model-path. Si no se proporciona ninguna ruta de modelo, se utilizará el valor predeterminado del archivo config.yaml.
+
+Este comando en especial, tarda alrededor de unos 10, 15 segundos. Nos toca esperar un poco hasta que muestre el siguiente mensaje:
 
 [source,bash]
 ----
 INFO ... After application startup complete see http://127.0.0.1:8000/docs for API.
 ----
 
-¡Genial! Estamos listos para probar el LLM.
+¡Genial! Acabamos de servir nuestro primer modelo y estamos listos para chatear con él.
 
 === Chatear con el modelo
 
-Dejamos el modelo sirviéndose en el terminal donde hemos trabajado y abriremos #un segundo terminal# en el directorio ilab. Volvemos a activar el entorno virtual de Python, pero esta vez iniciamos una sesión de chat con el comando `ilab model chat`.
+Ya que estamos sirviendo el modelo en el terminal superior, lo dejamos trabajando y pasamos a escribir en el terminal inferior.
+
+Debemos volver a activar el entorno virtual Python para ejecutar el comando ilab chat y comunicarnos con el modelo que está sirviendo.
 
 [.console-input]
 [source,bash]
 ----
+cd ~/instructlab
 source venv/bin/activate
-ilab model chat -m ~/.cache/instructlab/models/granite-7b-lab-Q4_K_M.gguf
 ----
 
 En tu terminal debería aparecer:
+
+[source,bash]
+----
+(venv) [instruct@bastion instructlab]$
+----
+
+Ya podemos volver a utilizar InstructLab. En este caso usaremos el comando ilab chat.
+
+[.console-input]
+[source,bash]
+----
+ilab model chat -m /home/instruct/.cache/instructlab/models/granite-7b-lab-Q4_K_M.gguf
+----
+
+El resultado debería ser una interfaz parecida a esta:
 
 [source,bash]
 ----
@@ -224,33 +245,58 @@ En tu terminal debería aparecer:
 >>>
 ----
 
-Tenemos todo listo para hacerle preguntas a nuestro LLM. Prueba a escribir:
+Tenemos todo listo para hacerle preguntas a nuestro LLM. Vamos a ver si conoce qué es Openshift, prueba a escribir:
 
 [.console-input]
 [source,bash]
 ----
-Can you give me a short summary of what Openshift is?
+What is OpenShift in 20 words or less?
 ----
 
-¡Genial! El modelo responde correctamente y debería explicar que Openshift es una plataforma de contenerización desarrollada por Red Hat. 
+¡Genial! El modelo responde correctamente y debería explicar que Openshift es una plataforma de contenerización desarrollada por Red Hat.
 
-Ahora, prueba a escribir en el chat: 
+Puedes continuar haciéndole preguntas aunque ten en cuenta lo siguiente: este modelo no dispone de conexión a internet y su conocimiento, aunque es general, es limitado. ¡Pero no hay problema! Con InstructLab lo entrenaremos para que aprenda más sobre esas áreas que nos interesan.
+
+=== Integrar modelo en la web
+
+Hasta ahora, hemos visto los conceptos básicos de cómo interactuar con InstructLab. Ahora vamos a dar un paso más allá mediante el uso de InstructLab con una aplicación de ejemplo. Vamos a utilizar InstructLab para aprovechar el modelo Granite entrenándolo con nuevos conocimientos y permitiendo que responda a las preguntas con eficacia. Esto lo haremos en el contexto de Parasol, una empresa ficticia que procesa las reclamaciones de seguros.
+
+Parasol tiene una aplicación de chatbot con IA (el modelo Granite) para proporcionar sugerencias de reparación para las reclamaciones presentadas. Esto permitiría a Parasol agilizar la tramitación de varias reclamaciones en espera.
+
+¡Vamos a poner a prueba Granite usando la web de Parasol!
+
+Dejamos a dejar los dos terminales como están y pinchamos en la pestaña superior "Parasol".
+
+image::parasol-view.png[]
+
+
+Lo que veremos será la intefaz de la web de Parasol. Veremos una tabla en la que cada fila es un caso de reclamación distinto. Si tienes curiosidad, puedes tomarte un tiempo para explorar la web.
+
+Para continuar con el laboratorio, nos centraremos en el primer caso de la tabla, el que tiene el identificador CLM195501 y ha sido generado por un tal Marty McFly.
+
+image::parasol-claim.png[]
+
+En la página de la reclamación, puedes ver que tenemos información como: la fecha en la que ocurrió el siniestro, el lugar, un resumen de cómo ocurrió el accidente y cómo se siente el cliente.
+
+Si miras en la esquina inferior derecha, hay un botón azul. Vamos a clicarlo para abrir el chat con el modelo Granite. Este chat está utilizando el modelo que hemos servido antes.
+
+image::parasol-chat.webp[]
+
+Vamos a imaginar que somos el personal de Parasol que gestiona las reclamaciones y que nos gustaría saber cuánto puede costar reparar el condensador de flujo del DeLorean de McFly.
 
 [.console-input]
 [source,bash]
 ----
-Can you give me a short summary of what InstructLab is?
+How much does it cost to repair a flux capacitor?
 ----
 
-Vaya. El modelo responde que InstructLab es una plataforma educativa, algo que no es cierto y se aleja de la realidad. Este error se suele denominar «*alucinación*» en el mundo de la IA. Para solucionarlo, toca pasar por el entrenamiento. ¡Manos a la obra!
+Deberías ver algo parecido a lo siguiente. Ten en cuenta que los LLM no son deterministas por naturaleza. Esto significa que incluso con la misma entrada, el modelo producirá respuestas variables. Por lo tanto, tus resultados pueden variar ligeramente.
 
-Antes de continuar, vamos a cerrar la sesión de chat con el modelo. Escribe 'exit'. 
+image::parasol-chat-response.webp[]
 
-[.console-input]
-[source,bash]
-----
-exit
-----
+Lo que acabamos de hacer es proporcionar información contextual sobre la reclamación en una conversación con el LLM utilizando Prompt Engineering. Pero, por desgracia, el chatbot no sabe cuánto cuesta reparar un condensador de flujo, ni tendrá ningún conocimiento específico del dominio de nuestra organización.
+
+Con InstructLab, podemos cambiar eso enseñando al modelo.
 
 [#entrenamiento]
 == 2. Entrenamiento del Modelo
@@ -261,34 +307,27 @@ Hemos probado a chatear con el modelo y ahora vamos a aprovechar el potencial de
 
 ¿Te has preguntado por qué InstructLab se llama así?
 
-El *método LAB* (**L**arge-scale **A**lignment for chat**B**ots) se basa en taxonomías.
-Las taxonomías son archivos YAML que contienen conocimientos y habilidades que InstructLab usa para su generación de datos.
+El *método LAB* (**L**arge-scale **A**lignment for chat**B**ots) se basa en taxonomías. Las taxonomías son archivos YAML que contienen conocimientos y habilidades que InstructLab usa para su generación de datos. Estas se crean manualmente y con cuidado.
 
-Echémosle un ojo a la taxonomía actual.
+InstructLab facilita el proceso de ajuste y mejora de los modelos mediante la recopilación de dos tipos de datos: conocimientos y habilidades. Esta información se recoge en una taxonomía de archivos YAML que se usa en el proceso de generación de datos sintéticos.
 
-[source,bash]
-----
-~/.local/share/instructlab/taxonomy/
-├── CODE_OF_CONDUCT.md
-├── compositional_skills
-│   ├── arts
-│   ├── engineering
-│   ├── geography
-│   ├── grounded
-│   │   ├── arts
-│   │   ├── engineering
-│   │   ├── geography
-----
+En la siguiente imagen puedes ver la estructura que puede tener una taxonomía. Las cajas moradas son nuestros archivos YAML, o mejor dicho QNAs (archivos de preguntas y respuestas). Si desde ahí seguimos hacia las capas de arriba, vemos que los YAML están organizados por su temática: finanzas, matemasticas, etc... Mientras que si continuamos hacia abajo, vemos su papel en la generación de datos sintéticos y entrenamiento.
 
-Vemos que la taxonomía incluye conocimiento sobre artes, ingeniería, geografía... Vamos a crear un directorio en el que insertar el conocimiento sobre InstructLab. En el mismo terminal, introducimos el siguiente comando:
+image::taxonomy.png[]
 
+=== Modificar la taxonomía
+
+Ahora partiendo de una taxonomía vacía, vamos a crear un lugar en el que almacenar información sobre el coche de McFly. Vuelve a la vista Terminales. En la ventana de terminal inferior donde hemos chateado, introduce 'exit' para salir de la sesión de chat.
 
 [.console-input]
 [source,bash]
 ----
-mkdir -p ~/.local/share/instructlab/taxonomy/knowledge/instructlab/overview
+mkdir -p /home/instruct/.local/share/instructlab/taxonomy/knowledge/parasol/claims
 ----
 
+Ahora lo que nos falta es un archivo QNA con los detalles específicos del coche. Por suerte, tenemos un PDF con esa información y podemos usar una herramienta open-source llamada Docling.
+
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 
 En el directorio ilab, ya hay preparado un archivo *qna.yaml*. InstructLab usa estos archivos para enseñar a los modelos. Estos contienen preguntas y respuestas sobre algo en concreto. Aquí tienes un ejemplo:
 
