@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Untitled :: InstructLab from the start</title>
+    <title>Untitled :: Red Hat Innovate Together</title>
     <link rel="canonical" href="https://github.com/dgpmakes/instructlab-start/company/index.html">
     <link rel="next" href="01-implementation.html">
     <meta name="generator" content="Antora 3.0.0">
@@ -14,7 +14,7 @@
   <nav class="navbar">
     <div class="navbar-brand">
       <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img src="../_/img/RHDLogo.svg" height="40px" alt="Red Hat Developer Program"></a>
-      <a class="navbar-item" style="font-size: 24px; color: white" href="https://github.com/dgpmakes/instructlab-start">InstructLab from the start</a>
+      <a class="navbar-item" style="font-size: 24px; color: white" href="https://github.com/dgpmakes/instructlab-start">Red Hat Innovate Together</a>
       <button class="navbar-burger" data-target="topbar-nav">
         <span></span>
         <span></span>
@@ -50,16 +50,25 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
-  <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="#instructlab">¿Qué es InstructLab?</a>
+  <li class="nav-item is-current-page" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="index.html">Antes de empezar</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#instructlab">¡Bienvenido al workshop!</a>
   </li>
-  <li class="nav-item" data-depth="1">
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="#objetivos">Objetivos</a>
+  </li>
+</ul>
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="01-implementation.html">Laboratorio</a>
 <ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="01-implementation.html#uso-basico">Comprender el laboratorio</a>
+  </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="01-implementation.html#uso-basico">1. Interactuar con un modelo</a>
   </li>
@@ -101,7 +110,7 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">Company</a></li>
-    <li><a href="#instructlab">¿Qué es InstructLab?</a></li>
+    <li><a href="index.html">Antes de empezar</a></li>
   </ul>
 </nav>
   <div class="edit-this-page"><a href="https://github.com/dgpmakes/instructlab-start/edit/master/documentation/modules/ROOT/pages/index.adoc">Edit this Page</a></div>
@@ -114,10 +123,43 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="instructlab"><a class="anchor" href="#instructlab"></a>¿Qué es InstructLab y cómo funciona?</h2>
+<h2 id="instructlab"><a class="anchor" href="#instructlab"></a>¡Bienvenido al workshop!</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>InstructLab es una plataforma open-source que nos permite trabajar fácilmente con Modelos de Lenguaje Grandes (LLMs): descargar y servir modelos, chatear con ellos, entrenarlos&#8230;&#8203;</p>
+<p>La IA está cambiando por completo nuestra forma de trabajar: nos ayuda a obtener información, predecir resultados, crear contenido&#8230;&#8203; Cuando hablamos de IA generativa de texto, hablamos de LLMs (Modelos de Lenguaje Grandes). Sin meternos en lo técnico, los LLMs son redes de neuronas. Reciben un input (lo que llamamos prompt), lo procesan con un algoritmo y devuelven un output, esa respuesta que parece una conversación.</p>
+</div>
+<div class="paragraph">
+<p>Probablemente ya hayas interactuado con un LLM. ChatGPT, Google Gemini o GitHub Copilot usan LLMs propios, de tamaños gigantescos, que requieren de muchísima potencia computacional para entrenar. ¿Y si creamos nuestro propio LLM? De esta forma podremos interactuar con él sin conexión a internet, con la privacidad de nuestros servidores y datos privados.</p>
+</div>
+<div class="paragraph">
+<p>Puede parecer una tarea complicada, ¡pero ahí entra en juego InstructLab! Se trata de una plataforma open-source que nos permite entrenar fácilmente a estos modelos de lenguaje. Además de que nos permite descargar y servir modelos, chatear con ellos, etc&#8230;&#8203;</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="objetivos"><a class="anchor" href="#objetivos"></a>🏁 Objetivos del Laboratorio</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>En este laboratorio, trabajaremos para una compañía de seguros ficticia, Parasol. Esta empresa quiere utilizar modelos de IA generativa para responder preguntas sobre accidentes de vehículos y así acelerar el ritmo de trabajo de sus equipos.</p>
+</div>
+<div class="paragraph">
+<p>En resumen, lo que haremos será:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Interactuar con un modelo base</strong>. Configuraremos InstructLab e interactuaremos mediante un chat.</p>
+</li>
+<li>
+<p><strong>Preparar el entrenamiento</strong>. Descubrirás la pieza central de InstructLab, las taxonomías.</p>
+</li>
+<li>
+<p><strong>Comprobar el resultado final</strong>. Chatearemos con el modelo entrenado para ver los resultados.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Te guiaremos paso a paso para que veas el funcionamiento de InstructLab. <strong>¡Vamos allá!</strong></p>
 </div>
 <div class="paragraph">
 <p><strong>Ejemplo</strong>: Queremos tener un modelo especializado en un área en específico, en este caso sobre ornitorrincos. No somos expertos en redes de neuronas, y nos sería complicado ponernos a ello desde cero. Por suerte, InstructLab está diseñado para que cualquiera pueda hacerlo.</p>
@@ -127,30 +169,6 @@
 </div>
 <div class="paragraph">
 <p>InstructLab se encarga de generar nuevas preguntas y respuestas a partir de la taxonomía y un modelo maestro. Finalmente, se entrena al modelo base y es capaz de responder nuestras preguntas sobre ornitorrincos.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="objetivos"><a class="anchor" href="#objetivos"></a>Objetivos del Laboratorio</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>En este laboratorio, vamos a:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><strong>Interactuar con un modelo</strong>. Iniciaremos InstructLab e interactuaremos mediante un chat.</p>
-</li>
-<li>
-<p><strong>Entrenar un modelo</strong>. Usaremos el potencial de InstructLab, las taxonomías.</p>
-</li>
-<li>
-<p><strong>Comprobar modelo entrenado</strong>. Chatearemos con el modelo entrenado para ver los resultados.</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>Te guiaremos paso a paso para que veas el funcionamiento básico de InstructLab. <strong>¡Vamos allá!</strong></p>
 </div>
 </div>
 </div>
