@@ -131,6 +131,9 @@
 <div class="paragraph">
 <p>En la segunda pestaña, leemos "Parasol". Esta es la web de nuestra empresa ficticia que queremos mejorar gracias a nuestro trabajo con InstructLab.</p>
 </div>
+<div class="paragraph">
+<p>En las instrucciones que vamos a seguir, verás rectángulos naranjas que incluyen comandos o frases. En ellos, puedes clicar en el icono de la derecha para directamente copiar esos fragmentos. ¡Algo útil para facilitar el laboratorio!</p>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -452,7 +455,7 @@ source venv/bin/activate</code></pre>
 <p>¡Vamos a poner a prueba Granite usando la web de Parasol!</p>
 </div>
 <div class="paragraph">
-<p>Dejamos a dejar los dos terminales como están y pinchamos en la pestaña superior "Parasol".</p>
+<p>Volvemos a dejar los dos terminales como están y pinchamos en la pestaña superior "Parasol".</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -460,7 +463,7 @@ source venv/bin/activate</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Lo que veremos será la intefaz de la web de Parasol. Veremos una tabla en la que cada fila es un caso de reclamación distinto. Si tienes curiosidad, puedes tomarte un tiempo para explorar la web.</p>
+<p>Lo que veremos será la intefaz de la web de Parasol. Tenemos una tabla en la que cada fila es un caso de reclamación distinto. Si tienes curiosidad, puedes tomarte un tiempo para explorar la web.</p>
 </div>
 <div class="paragraph">
 <p>Para continuar con el laboratorio, nos centraremos en el primer caso de la tabla, el que tiene el identificador CLM195501 y ha sido generado por un tal Marty McFly.</p>
@@ -510,7 +513,7 @@ source venv/bin/activate</code></pre>
 <h2 id="entrenamiento"><a class="anchor" href="#entrenamiento"></a>2. Entrenamiento del Modelo</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Hemos probado a chatear con el modelo y ahora vamos a aprovechar el potencial de InstructLab, centrándonos en <strong>mejorar la taxonomía</strong>. Añadiremos conocimiento sobre InstructLab al modelo para que sepa más del proyecto y pueda responder a nuestras preguntas.</p>
+<p>Hemos probado a chatear con el modelo y ahora vamos a aprovechar el potencial de InstructLab, centrándonos en <strong>mejorar la taxonomía</strong>. Añadiremos conocimiento sobre el coche de McFly al modelo para que sepa más sobre sus especificaciones y pueda responder a nuestras preguntas.</p>
 </div>
 <div class="sect2">
 <h3 id="_entender_la_taxonomía"><a class="anchor" href="#_entender_la_taxonomía"></a>Entender la taxonomía</h3>
@@ -543,7 +546,44 @@ source venv/bin/activate</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Ahora lo que nos falta es un archivo QNA con los detalles específicos del coche. Por suerte, tenemos un PDF con esa información y podemos usar una herramienta open-source llamada Docling.</p>
+<p>Ahora lo que nos falta es un archivo QNA con los detalles específicos del coche. Por suerte, tenemos un PDF con esa información que puedes ver en este <a href="https://github.com/dgpmakes/instructlab-start/blob/master/ilab/DeLorean%20PDF.pdf">link</a>.</p>
+</div>
+<div class="paragraph">
+<p>Siguiente paso. Vamos a utilizar Docling, una herramienta open-source que nos permite fácilmente transformar archivos a formatos más convenientes. De esta forma, podremos transformar nuestro PDF en un archivo de texto y así crear nuesto QNA de forma cómoda.</p>
+</div>
+<div class="paragraph">
+<p>Utiliza el siguiente comando para instalar Docling:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">pip install docling</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Este comando puede tardar alrededor de un minuto, debemos esperar hasta que volvamos a tener la línea de comandos activa. Mientras, puedes echarle un ojo a la <a href="https://github.com/dgpmakes/instructlab-start/blob/master/ilab/DeLorean%20PDF.pdf">documentación</a> de Docling.</p>
+</div>
+<div class="paragraph">
+<p>Una vez instalado, ejecutamos los siguientes comandos para que Docling transforme el PDF correctamente:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cd /home/instructlab/files/
+docling https://github.com/dgpmakes/instructlab-start/raw/refs/heads/master/ilab/DeLorean%20PDF.pdf</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Si todo ha ido bien, después de unos segundos deberíamos volver a tener el control del terminal. Vamos a echarle un ojo al resultado final.</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cat /home/instructlab/files/DeLorean%20PDF.md</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>En este caso, el trabajo de Docling es muy básico. ¿Pero y si tuvieramos un PDF con cientos de páginas? Docling es realmente útil a la hora de preprocesar datos en el ámbito del aprendizaje automático.</p>
+</div>
+<div class="paragraph">
+<p>Teniendo ya la información en texto plano, solo quedaría crear el archivo QNA y rellenarlo con toda nuestra información.</p>
 </div>
 <div class="paragraph">
 <p>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</p>
