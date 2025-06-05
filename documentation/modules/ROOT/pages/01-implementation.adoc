@@ -295,9 +295,7 @@ Deberías ver algo parecido a lo siguiente. Ten en cuenta que los LLM no son det
 
 image::parasol-chat-response.webp[]
 
-Lo que acabamos de hacer es proporcionar información contextual sobre la reclamación en una conversación con el LLM utilizando Prompt Engineering. Pero, por desgracia, el chatbot no sabe cuánto cuesta reparar un condensador de flujo, ni tendrá ningún conocimiento específico del dominio de nuestra organización.
-
-Con InstructLab, podemos cambiar eso enseñando al modelo.
+Lo que acabamos de hacer es proporcionar información contextual sobre la reclamación en una conversación con el LLM utilizando Prompt Engineering. Pero, por desgracia, el chatbot no sabe cuánto cuesta reparar un condensador de flujo, ni tendrá ningún conocimiento específico del dominio de nuestra empresa. Con InstructLab, podemos cambiar eso enseñando al modelo.
 
 [#entrenamiento]
 == 2. Entrenamiento del Modelo
@@ -316,9 +314,34 @@ En la siguiente imagen puedes ver la estructura que puede tener una taxonomía. 
 
 image::taxonomy.png[]
 
+Vamos a echar un vistazo a la taxonomía actual. Vuelve a la pestaña Terminales. En la ventana de terminal inferior donde hemos chateado, introduce 'exit' para salir de la sesión de chat y escribe el siguiente comando:
+
+[.console-input]
+[source,bash]
+----
+cd /home/instruct/.local/share/instructlab
+tree taxonomy | head -n 20
+----
+
+Deberías ver algo parecido a esto:
+
+[source,bash]
+----
+taxonomy
+├── CODE_OF_CONDUCT.md
+├── compositional_skills
+│   ├── arts
+│   ├── engineering
+│   ├── geography
+│   ├── grounded
+│   │   ├── arts
+│   │   ├── engineering
+│   │   ├── geography
+----
+
 === Modificar la taxonomía
 
-Ahora partiendo de una taxonomía vacía, vamos a crear un lugar en el que almacenar información sobre el coche de McFly. Vuelve a la vista Terminales. En la ventana de terminal inferior donde hemos chateado, introduce 'exit' para salir de la sesión de chat.
+Partiendo de esta taxonomía, vamos a crear un lugar en el que almacenar información sobre el coche de McFly. 
 
 [.console-input]
 [source,bash]
@@ -338,10 +361,9 @@ Utiliza el siguiente comando para instalar Docling:
 pip install docling
 ----
 
-Este comando puede tardar alrededor de un minuto, debemos esperar hasta que volvamos a tener la línea de comandos activa. Mientras, puedes echarle un ojo a la link:https://github.com/dgpmakes/instructlab-start/blob/master/ilab/DeLorean%20PDF.pdf[documentación] de Docling.
+Este comando puede tardar alrededor de un minuto, debemos esperar hasta que volvamos a tener la línea de comandos activa. Mientras, puedes echarle un ojo a la link:https://docling-project.github.io/docling/[documentación] de Docling.
 
 Una vez instalado, ejecutamos los siguientes comandos para que Docling transforme el PDF correctamente:
-
 
 [.console-input]
 [source,bash]
@@ -358,32 +380,88 @@ Si todo ha ido bien, después de unos segundos deberíamos volver a tener el con
 cat /home/instructlab/files/DeLorean%20PDF.md
 ----
 
-En este caso, el trabajo de Docling es muy básico. ¿Pero y si tuvieramos un PDF con cientos de páginas? Docling es realmente útil a la hora de preprocesar datos en el ámbito del aprendizaje automático.
+En este caso, el trabajo de Docling es muy básico. Pero, ¿y si tuvieramos un PDF con cientos de páginas? Docling es realmente útil a la hora de preprocesar datos en el ámbito del aprendizaje automático.
 
-Teniendo ya la información en texto plano, solo quedaría crear el archivo QNA y rellenarlo con toda nuestra información.
-
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-
-En el directorio ilab, ya hay preparado un archivo *qna.yaml*. InstructLab usa estos archivos para enseñar a los modelos. Estos contienen preguntas y respuestas sobre algo en concreto. Aquí tienes un ejemplo:
-
-[source,bash]
-----
-- answer: The mission of instructlab is to let everyone shape generative AI
-    by enabling contributed updates to existing LLMs in an accessible way.
-    The community welcomes all those who would like to help enable everyone
-    to shape the future of generative AI.
-  question: 'What is the mission of Instructlab?'
-----
-
-Ahora vamos a incluir las preguntas y respuestas en el directorio que hemos creado.
+Teniendo ya la información en texto plano, solo quedaría crear el archivo QNA y rellenarlo con toda nuestra información. Para ahorrar tiempo, el archivo QNA ya está rellenado y lo puedes ver con el siguiente comando:
 
 [.console-input]
 [source,bash]
 ----
-cp qna.yaml ~/.local/share/instructlab/taxonomy/knowledge/instructlab/overview
+cat -av ~/files/backToTheFuture/qna.yaml /home/instruct/.local/share/instructlab/taxonomy/knowledge/parasol/claims/
 ----
 
-Para comprobar que la sintaxis del *qna.yaml* es correcta, escribe el siguiente comando:
+[source,bash]
+----
+version: 3
+domain: time_travel
+created_by: Marty McFly
+seed_examples:
+  - context: |
+      The DeLorean DMC-12 is a sports car manufactured by John DeLorean`s DeLorean Motor Company
+      for the American market from 1981 to 1983. The car features gull-wing doors and a stainless-steel body.
+      It gained fame for its appearance as the time machine in the ''Back to the Future'' film trilogy.
+    questions_and_answers:
+      - question: |
+          When was the DeLorean manufactured?
+        answer: |
+          The DeLorean was manufactured from 1981 to 1983.
+      - question: |
+          Who manufactured the DeLorean DMC-12?
+        answer: |
+          The DeLorean Motor Company manufactured the DeLorean DMC-12.
+      - question: |
+          What type of doors does the DeLorean DMC-12 have?
+        answer: |
+          Gull-wing doors.
+document_outline: |
+  Details and repair costs on a DeLorean DMC-12 car.
+document:
+  repo: https://github.com/gshipley/backToTheFuture.git
+  commit: 8bd9220c616afe24b9673d94ec1adce85320809c
+  patterns:
+    - data.md
+----
+
+Se trata de un archivo YAML que consiste en una lista de ejemplos de preguntas y respuestas que utilizará el modelo maestro Merlinite para generar los datos sintéticos. 
+
+Aquí tienes una descripción de cada componente del archivo:
+
+1. `version`: La versión del archivo qna.yaml, este es el formato del archivo utilizado para la generación de datos sintéticos. El valor debe ser el número 3.
+
+2. `created_by`: El usuario de GitHub del creador.
+
+3. `domain`: La categoría específica del área de conocimiento.
+
+4. `seed_examples`: Una colección de entradas key/value.
+
+a. `context`: Un párrafo extraído del documento original. Cada qna.yaml puede usar un máximo de 5 bloques de contexto con un tamaño de 500 caracteres.
+
+b. `questions_and_answers`: El parámetro que contiene las preguntas y respuestas.
+
+c. `question`: Especifica una pregunta ejemplo para el modelo. Cada archivo qna.yaml necesita al menos 3 pares de preguntas y respuestas por cada contexto. Las preguntas deben tener como máximo 250 caracteres.
+
+d. `answer`: Especifica la respuesta a la pregunta. Puede contener como máximo 250 caracteres.
+
+5. `document_outline`: Un resumen del documento fuente.
+
+6. `document`: La fuente de la cuál hemos extraído la información.
+
+a. `repo`: La URL al repositorio que contiene el documento fuente. En este caso, el documento en texto plano está subido en un repositorio de GitHub.
+
+b. `commit`: El número identificativo del commit del repositorio en el que encontrar el documento en texto plano.
+
+c. `patterns`: Una nomenclatura para especificar los archivos de texto plano del repositorio. Cualquier patrón `glob` que empiece por *, como *.md, debe entrecomillarse debido a las reglas YAML. Por ejemplo, *.md.
+
+
+Lo que haremos ahora será copiar el archivo qna.yaml al directorio que hemos creado en la taxonomía. Puedes hacerlo con el siguiente comando:
+
+[.console-input]
+[source,bash]
+----
+cp -av ~/files/backToTheFuture/qna.yaml /home/instruct/.local/share/instructlab/taxonomy/knowledge/parasol/claims/
+----
+
+InstructLab nos permite validar la sintáxis de los archivos qna.yaml antes de la generación de datos sintéticos. Esto nos ayuda a verificar que no hay ningún error tipográfico y todo está en orden:
 
 [.console-input]
 [source,bash]
@@ -391,69 +469,119 @@ Para comprobar que la sintaxis del *qna.yaml* es correcta, escribe el siguiente 
 ilab taxonomy diff
 ----
 
-Deberías obtener lo siguiente:
+El resultado debería parecerse a esto:
 
 [source,bash]
 ----
-Taxonomy in /taxonomy/ is valid :)
+knowledge/parasol/claims/qna.yaml
+Taxonomy in /home/instruct/.local/share/instructlab/taxonomy is valid :)
 ----
 
+=== Generar datos sintéticos
 
-=== Entrenar modelo
+¡Perfecto! Hemos añadido nuevo conocimiento en la taxonomía. El siguiente paso es la parte más importante de InstructLab, generar los datos sintéticos.
 
-¡Perfecto! Hemos añadido nuevo conocimiento en la taxonomía. El siguiente paso es generar los datos sintéticos.
+Un modelo maestro usará la taxonomía que hemos definido para generar más ejemplos de preguntas y respuestas. Cuantas más preguntas y respuestas tengamos, más sólido será el entrenamiento. Finalmente, entrenaremos al modelo con nuestras preguntas y respuestas y con lo generado sintéticamente.
+El resultado será un nuevo modelo que comprenda el conocimiento que hemos indicado. Para más información sobre la generación de datos sintéticos y entrenamiento, visita este link:https://github.com/instructlab/instructlab?tab=readme-ov-file#-creating-new-knowledge-or-skills-and-training-the-model[link].
 
-Un modelo maestro usará la taxonomía que hemos definido para generar más ejemplos de preguntas y respuestas. Cuantas más preguntas y respuestas tengamos, más sólido será el entrenamiento. Finalmente, entrenamos al modelo con nuestra taxonomía y los datos sintéticos.
-El resultado será un nuevo modelo que comprenda el conocimiento que hemos indicado. Para más información sobre el entrenamiento, visita este link:https://github.com/instructlab/instructlab?tab=readme-ov-file#-creating-new-knowledge-or-skills-and-training-the-model[link].
+El tiempo que toma generar datos sintéticos dependerá de nuestro hardware. En este laboratorio, se tarda alrededor de 7 minutos en hacer la pipeline por defecto para la generación de datos al tener una escala de 30. Para ahorrar tiempo, vamos a cambiar el factor de escalado a 5. No es lo más recomendable para un caso real, pero así podremos continuar con el laboratorio más rápido.
 
-Generar datos sintéticos y entrenar lleva *varias horas* y por cuestión de tiempo, vamos a comprobar el aprendizaje usando el modelo preentrenado. ¡Como si fuera un programa de cocina!
+Es importante subrayar que las preguntas y respuestas generadas son mayormente reformulaciones de las preguntas y respuestas que hemos escrito manualmente. Aunque parezca algo simple, esto permite al modelo reconocer más fácilmente lo que se le pide y responder correctamente. 
+
+Vamos a iniciar la generación con el siguiente comando:
+
+[.console-input]
+[source,bash]
+----
+ilab data generate --model /home/instruct/.cache/instructlab/models/merlinite-7b-lab-Q4_K_M.gguf --sdg-scale-factor 5 --pipeline simple --gpus 1
+----
+
+Vamos a esperar alrededor de un minuto a que termine de ejecutarse y volvamos a tener control sobre el terminal. Ya la generación de datos habrá terminado y podremos continuar con el paso final, el entrenamiento.
+
+=== Entrenar
+
+Entrenar es con diferencia el proceso más largo. Require de potencia computacional y de tiempo. En este entorno de laboratorio en el que contamos con gráficas de Nvidia lleva *varias horas*. Por cuestión de tiempo, hemos replicado los pasos de este laboratorio para dejar ya entrenado el modelo. ¡Como si fuera un programa de cocina!
 
 [#interaccion]
 == 3. Comprobar modelo entrenado
 
-¡Hora de probar el modelo entrenado! Vamos al primer terminal y dejamos de servir el modelo usando `CTRL`+`C`. 
+Vamos a comprobar si el modelo ha aprendido y responde correctamente a nuestras preguntas sobre el coche de McFly. Si aún se está sirviendo el modelo inicial en el terminal superior, dejamos de ejecutarlo clicando en ese terminal y pulsando `CTRL`+`C`. Deberíamos obtener algo parecido a esto y volver a tener control sobre el terminal:
 
 [source,bash]
 ----
-INFO 2024-05-06 18:41:08,496 server.py:197 After application startup complete see http://127.0.0.1:8000/docs for API.
+INFO 2025-24-09 12:41:08,496 server.py:197 After application startup complete see http://127.0.0.1:8000/docs for API.
 ^C
 Aborted!
 ----
 
-Luego, servimos el modelo preentrenado:
+Genial, ahora servimos el modelo preentrenado en el mismo terminal:
 
 [.console-input]
 [source,bash]
 ----
-ilab model serve --model-path ~/.cache/instructlab/models/ggml-ilab-pretrained-Q4_K_M.gguf
+ilab model serve --model-path /home/instruct/files/summit-connect-merlinite-lab-Q4.gguf
 ----
 
-Esperamos unos segundos, volvemos al segundo terminal e iniciamos el chat con el LLM.
-
+Esperamos unos segundos hasta obtener la confirmación de que se está sirviendo:
 
 [.console-input]
 [source,bash]
 ----
-ilab model chat -m ~/.cache/instructlab/models/ggml-ilab-pretrained-Q4_K_M.gguf
+INFO 2024-10-20 17:24:33,497 instructlab.model.serve:136: Using model '/home/instruct/summit-connect-merlinite-lab-Q4.gguf' with -1 gpu-layers and 4096 max context size.
+INFO 2024-10-20 17:24:33,497 instructlab.model.serve:140: Serving model '/home/instruct/summit-connect-merlinite-lab-Q4.gguf' with llama-cpp
+INFO 2024-10-20 17:24:34,492 instructlab.model.backends.llama_cpp:232: Replacing chat template:
+ {% for message in messages %}
+{% if message['role'] == 'user' %}
+{{ '<|user|>
+' + message['content'] }}
+{% elif message['role'] == 'system' %}
+{{ '<|system|>
+' + message['content'] }}
+{% elif message['role'] == 'assistant' %}
+{{ '<|assistant|>
+' + message['content'] + eos_token }}
+{% endif %}
+{% if loop.last and add_generation_prompt %}
+{{ '<|assistant|>' }}
+{% endif %}
+{% endfor %}
+INFO 2024-10-20 17:24:34,495 instructlab.model.backends.llama_cpp:189: Starting server process, press CTRL+C to shutdown server...
+INFO 2024-10-20 17:24:34,495 instructlab.model.backends.llama_cpp:190: After application startup complete see http://127.0.0.1:8000/docs for API.
 ----
 
-¡Llega la hora de la verdad! Prueba a preguntar al LLM sobre InstructLab:
+Llega el momento de la verdad, comprobar si el modelo que hemos entrenado funciona en la web de Parasol. Vamos a cambiar de pestaña a "Parasol". 
+
+¡IMPORTANTE! Tenemos que refrescar la web del navegador para aplicar nuestros cambios.
+
+image::parasol-view.png[]
+
+Ahora volvemos al primer caso, el del coche de Marty McFly con número CLM195501.
+
+image::parasol-claim.png[]
+
+Sólo queda abrir la sesión de chat con el modelo clicando en el botón azul de la esquina inferior derecha. Si ya la tienes abierta, clica en el botón `+` que aparece debajo de la caja en la que escribimos texto. De esta forma, iniciaremos un nuevo chat.
+
+image::parasol-chat.webp[]
+
+Vamos a preguntar al chatbot la misma pregunta que le hicimos anteriormente y comprobar qué ha aprendido.
 
 [.console-input]
 [source,bash]
 ----
-Can you give me a short summary of what InstructLab is?
+How much does it cost to repair a flux capacitor?
 ----
 
 ¡Yuju! La respuesta debería ser mucho mejor que la última vez. El LLM debe ser capaz de explicar que InstructLab.
+
+image::parasol-chat-response.webp[]
 
 === Conclusión
 
 *¡Laboratorio terminado con éxito!* Esperamos que hayas disfrutado probando de primera mano el potencial de InstructLab. Como pequeño repaso, has conseguido lo siguiente:
 
-* Chatear con un LLM
-* Modificar la taxonomía de InstructLab
-* Comprobar el desempeño del modelo entrenado
+* Servir y chatear con un LLM en nuestra web
+* Preparar los datos de entrenamiento y modificar la taxonomía de InstructLab
+* Generar datos sintéticos y comprobar el desempeño del modelo entrenado
 
 Gracias por haber dedicado tu esfuerzo y tiempo a aprender más sobre inteligencia articial y LLMs. Para más información sobre InstructLab, ¡echa un ojo a la comunidad en Github! https://github.com/instructlab
 
