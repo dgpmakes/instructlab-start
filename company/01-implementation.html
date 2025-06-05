@@ -501,10 +501,7 @@ source venv/bin/activate</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Lo que acabamos de hacer es proporcionar información contextual sobre la reclamación en una conversación con el LLM utilizando Prompt Engineering. Pero, por desgracia, el chatbot no sabe cuánto cuesta reparar un condensador de flujo, ni tendrá ningún conocimiento específico del dominio de nuestra organización.</p>
-</div>
-<div class="paragraph">
-<p>Con InstructLab, podemos cambiar eso enseñando al modelo.</p>
+<p>Lo que acabamos de hacer es proporcionar información contextual sobre la reclamación en una conversación con el LLM utilizando Prompt Engineering. Pero, por desgracia, el chatbot no sabe cuánto cuesta reparar un condensador de flujo, ni tendrá ningún conocimiento específico del dominio de nuestra empresa. Con InstructLab, podemos cambiar eso enseñando al modelo.</p>
 </div>
 </div>
 </div>
@@ -534,11 +531,37 @@ source venv/bin/activate</code></pre>
 <img src="_images/taxonomy.png" alt="taxonomy">
 </div>
 </div>
+<div class="paragraph">
+<p>Vamos a echar un vistazo a la taxonomía actual. Vuelve a la pestaña Terminales. En la ventana de terminal inferior donde hemos chateado, introduce 'exit' para salir de la sesión de chat y escribe el siguiente comando:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cd /home/instruct/.local/share/instructlab
+tree taxonomy | head -n 20</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Deberías ver algo parecido a esto:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">taxonomy
+├── CODE_OF_CONDUCT.md
+├── compositional_skills
+│   ├── arts
+│   ├── engineering
+│   ├── geography
+│   ├── grounded
+│   │   ├── arts
+│   │   ├── engineering
+│   │   ├── geography</code></pre>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_modificar_la_taxonomía"><a class="anchor" href="#_modificar_la_taxonomía"></a>Modificar la taxonomía</h3>
 <div class="paragraph">
-<p>Ahora partiendo de una taxonomía vacía, vamos a crear un lugar en el que almacenar información sobre el coche de McFly. Vuelve a la vista Terminales. En la ventana de terminal inferior donde hemos chateado, introduce 'exit' para salir de la sesión de chat.</p>
+<p>Partiendo de esta taxonomía, vamos a crear un lugar en el que almacenar información sobre el coche de McFly.</p>
 </div>
 <div class="listingblock console-input">
 <div class="content">
@@ -560,7 +583,7 @@ source venv/bin/activate</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Este comando puede tardar alrededor de un minuto, debemos esperar hasta que volvamos a tener la línea de comandos activa. Mientras, puedes echarle un ojo a la <a href="https://github.com/dgpmakes/instructlab-start/blob/master/ilab/DeLorean%20PDF.pdf">documentación</a> de Docling.</p>
+<p>Este comando puede tardar alrededor de un minuto, debemos esperar hasta que volvamos a tener la línea de comandos activa. Mientras, puedes echarle un ojo a la <a href="https://docling-project.github.io/docling/">documentación</a> de Docling.</p>
 </div>
 <div class="paragraph">
 <p>Una vez instalado, ejecutamos los siguientes comandos para que Docling transforme el PDF correctamente:</p>
@@ -580,36 +603,115 @@ docling https://github.com/dgpmakes/instructlab-start/raw/refs/heads/master/ilab
 </div>
 </div>
 <div class="paragraph">
-<p>En este caso, el trabajo de Docling es muy básico. ¿Pero y si tuvieramos un PDF con cientos de páginas? Docling es realmente útil a la hora de preprocesar datos en el ámbito del aprendizaje automático.</p>
+<p>En este caso, el trabajo de Docling es muy básico. Pero, ¿y si tuvieramos un PDF con cientos de páginas? Docling es realmente útil a la hora de preprocesar datos en el ámbito del aprendizaje automático.</p>
 </div>
 <div class="paragraph">
-<p>Teniendo ya la información en texto plano, solo quedaría crear el archivo QNA y rellenarlo con toda nuestra información.</p>
-</div>
-<div class="paragraph">
-<p>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</p>
-</div>
-<div class="paragraph">
-<p>En el directorio ilab, ya hay preparado un archivo <strong>qna.yaml</strong>. InstructLab usa estos archivos para enseñar a los modelos. Estos contienen preguntas y respuestas sobre algo en concreto. Aquí tienes un ejemplo:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">- answer: The mission of instructlab is to let everyone shape generative AI
-    by enabling contributed updates to existing LLMs in an accessible way.
-    The community welcomes all those who would like to help enable everyone
-    to shape the future of generative AI.
-  question: 'What is the mission of Instructlab?'</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Ahora vamos a incluir las preguntas y respuestas en el directorio que hemos creado.</p>
+<p>Teniendo ya la información en texto plano, solo quedaría crear el archivo QNA y rellenarlo con toda nuestra información. Para ahorrar tiempo, el archivo QNA ya está rellenado y lo puedes ver con el siguiente comando:</p>
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cp qna.yaml ~/.local/share/instructlab/taxonomy/knowledge/instructlab/overview</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cat -av ~/files/backToTheFuture/qna.yaml /home/instruct/.local/share/instructlab/taxonomy/knowledge/parasol/claims/</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">version: 3
+domain: time_travel
+created_by: Marty McFly
+seed_examples:
+  - context: |
+      The DeLorean DMC-12 is a sports car manufactured by John DeLorean`s DeLorean Motor Company
+      for the American market from 1981 to 1983. The car features gull-wing doors and a stainless-steel body.
+      It gained fame for its appearance as the time machine in the ''Back to the Future'' film trilogy.
+    questions_and_answers:
+      - question: |
+          When was the DeLorean manufactured?
+        answer: |
+          The DeLorean was manufactured from 1981 to 1983.
+      - question: |
+          Who manufactured the DeLorean DMC-12?
+        answer: |
+          The DeLorean Motor Company manufactured the DeLorean DMC-12.
+      - question: |
+          What type of doors does the DeLorean DMC-12 have?
+        answer: |
+          Gull-wing doors.
+document_outline: |
+  Details and repair costs on a DeLorean DMC-12 car.
+document:
+  repo: https://github.com/gshipley/backToTheFuture.git
+  commit: 8bd9220c616afe24b9673d94ec1adce85320809c
+  patterns:
+    - data.md</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Para comprobar que la sintaxis del <strong>qna.yaml</strong> es correcta, escribe el siguiente comando:</p>
+<p>Se trata de un archivo YAML que consiste en una lista de ejemplos de preguntas y respuestas que utilizará el modelo maestro Merlinite para generar los datos sintéticos.</p>
+</div>
+<div class="paragraph">
+<p>Aquí tienes una descripción de cada componente del archivo:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>version</code>: La versión del archivo qna.yaml, este es el formato del archivo utilizado para la generación de datos sintéticos. El valor debe ser el número 3.</p>
+</li>
+<li>
+<p><code>created_by</code>: El usuario de GitHub del creador.</p>
+</li>
+<li>
+<p><code>domain</code>: La categoría específica del área de conocimiento.</p>
+</li>
+<li>
+<p><code>seed_examples</code>: Una colección de entradas key/value.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p><code>context</code>: Un párrafo extraído del documento original. Cada qna.yaml puede usar un máximo de 5 bloques de contexto con un tamaño de 500 caracteres.</p>
+</li>
+<li>
+<p><code>questions_and_answers</code>: El parámetro que contiene las preguntas y respuestas.</p>
+</li>
+<li>
+<p><code>question</code>: Especifica una pregunta ejemplo para el modelo. Cada archivo qna.yaml necesita al menos 3 pares de preguntas y respuestas por cada contexto. Las preguntas deben tener como máximo 250 caracteres.</p>
+</li>
+<li>
+<p><code>answer</code>: Especifica la respuesta a la pregunta. Puede contener como máximo 250 caracteres.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p><code>document_outline</code>: Un resumen del documento fuente.</p>
+</li>
+<li>
+<p><code>document</code>: La fuente de la cuál hemos extraído la información.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p><code>repo</code>: La URL al repositorio que contiene el documento fuente. En este caso, el documento en texto plano está subido en un repositorio de GitHub.</p>
+</li>
+<li>
+<p><code>commit</code>: El número identificativo del commit del repositorio en el que encontrar el documento en texto plano.</p>
+</li>
+<li>
+<p><code>patterns</code>: Una nomenclatura para especificar los archivos de texto plano del repositorio. Cualquier patrón <code>glob</code> que empiece por *, como *.md, debe entrecomillarse debido a las reglas YAML. Por ejemplo, *.md.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Lo que haremos ahora será copiar el archivo qna.yaml al directorio que hemos creado en la taxonomía. Puedes hacerlo con el siguiente comando:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cp -av ~/files/backToTheFuture/qna.yaml /home/instruct/.local/share/instructlab/taxonomy/knowledge/parasol/claims/</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>InstructLab nos permite validar la sintáxis de los archivos qna.yaml antes de la generación de datos sintéticos. Esto nos ayuda a verificar que no hay ningún error tipográfico y todo está en orden:</p>
 </div>
 <div class="listingblock console-input">
 <div class="content">
@@ -617,25 +719,46 @@ docling https://github.com/dgpmakes/instructlab-start/raw/refs/heads/master/ilab
 </div>
 </div>
 <div class="paragraph">
-<p>Deberías obtener lo siguiente:</p>
+<p>El resultado debería parecerse a esto:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">Taxonomy in /taxonomy/ is valid :)</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">knowledge/parasol/claims/qna.yaml
+Taxonomy in /home/instruct/.local/share/instructlab/taxonomy is valid :)</code></pre>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_entrenar_modelo"><a class="anchor" href="#_entrenar_modelo"></a>Entrenar modelo</h3>
+<h3 id="_generar_datos_sintéticos"><a class="anchor" href="#_generar_datos_sintéticos"></a>Generar datos sintéticos</h3>
 <div class="paragraph">
-<p>¡Perfecto! Hemos añadido nuevo conocimiento en la taxonomía. El siguiente paso es generar los datos sintéticos.</p>
+<p>¡Perfecto! Hemos añadido nuevo conocimiento en la taxonomía. El siguiente paso es la parte más importante de InstructLab, generar los datos sintéticos.</p>
 </div>
 <div class="paragraph">
-<p>Un modelo maestro usará la taxonomía que hemos definido para generar más ejemplos de preguntas y respuestas. Cuantas más preguntas y respuestas tengamos, más sólido será el entrenamiento. Finalmente, entrenamos al modelo con nuestra taxonomía y los datos sintéticos.
-El resultado será un nuevo modelo que comprenda el conocimiento que hemos indicado. Para más información sobre el entrenamiento, visita este <a href="https://github.com/instructlab/instructlab?tab=readme-ov-file#-creating-new-knowledge-or-skills-and-training-the-model">link</a>.</p>
+<p>Un modelo maestro usará la taxonomía que hemos definido para generar más ejemplos de preguntas y respuestas. Cuantas más preguntas y respuestas tengamos, más sólido será el entrenamiento. Finalmente, entrenaremos al modelo con nuestras preguntas y respuestas y con lo generado sintéticamente.
+El resultado será un nuevo modelo que comprenda el conocimiento que hemos indicado. Para más información sobre la generación de datos sintéticos y entrenamiento, visita este <a href="https://github.com/instructlab/instructlab?tab=readme-ov-file#-creating-new-knowledge-or-skills-and-training-the-model">link</a>.</p>
 </div>
 <div class="paragraph">
-<p>Generar datos sintéticos y entrenar lleva <strong>varias horas</strong> y por cuestión de tiempo, vamos a comprobar el aprendizaje usando el modelo preentrenado. ¡Como si fuera un programa de cocina!</p>
+<p>El tiempo que toma generar datos sintéticos dependerá de nuestro hardware. En este laboratorio, se tarda alrededor de 7 minutos en hacer la pipeline por defecto para la generación de datos al tener una escala de 30. Para ahorrar tiempo, vamos a cambiar el factor de escalado a 5. No es lo más recomendable para un caso real, pero así podremos continuar con el laboratorio más rápido.</p>
+</div>
+<div class="paragraph">
+<p>Es importante subrayar que las preguntas y respuestas generadas son mayormente reformulaciones de las preguntas y respuestas que hemos escrito manualmente. Aunque parezca algo simple, esto permite al modelo reconocer más fácilmente lo que se le pide y responder correctamente.</p>
+</div>
+<div class="paragraph">
+<p>Vamos a iniciar la generación con el siguiente comando:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">ilab data generate --model /home/instruct/.cache/instructlab/models/merlinite-7b-lab-Q4_K_M.gguf --sdg-scale-factor 5 --pipeline simple --gpus 1</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Vamos a esperar alrededor de un minuto a que termine de ejecutarse y volvamos a tener control sobre el terminal. Ya la generación de datos habrá terminado y podremos continuar con el paso final, el entrenamiento.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_entrenar"><a class="anchor" href="#_entrenar"></a>Entrenar</h3>
+<div class="paragraph">
+<p>Entrenar es con diferencia el proceso más largo. Require de potencia computacional y de tiempo. En este entorno de laboratorio en el que contamos con gráficas de Nvidia lleva <strong>varias horas</strong>. Por cuestión de tiempo, hemos replicado los pasos de este laboratorio para dejar ya entrenado el modelo. ¡Como si fuera un programa de cocina!</p>
 </div>
 </div>
 </div>
@@ -644,41 +767,92 @@ El resultado será un nuevo modelo que comprenda el conocimiento que hemos indic
 <h2 id="interaccion"><a class="anchor" href="#interaccion"></a>3. Comprobar modelo entrenado</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>¡Hora de probar el modelo entrenado! Vamos al primer terminal y dejamos de servir el modelo usando <code>CTRL</code>+<code>C</code>.</p>
+<p>Vamos a comprobar si el modelo ha aprendido y responde correctamente a nuestras preguntas sobre el coche de McFly. Si aún se está sirviendo el modelo inicial en el terminal superior, dejamos de ejecutarlo clicando en ese terminal y pulsando <code>CTRL</code>+<code>C</code>. Deberíamos obtener algo parecido a esto y volver a tener control sobre el terminal:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">INFO 2024-05-06 18:41:08,496 server.py:197 After application startup complete see http://127.0.0.1:8000/docs for API.
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">INFO 2025-24-09 12:41:08,496 server.py:197 After application startup complete see http://127.0.0.1:8000/docs for API.
 ^C
 Aborted!</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Luego, servimos el modelo preentrenado:</p>
+<p>Genial, ahora servimos el modelo preentrenado en el mismo terminal:</p>
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">ilab model serve --model-path ~/.cache/instructlab/models/ggml-ilab-pretrained-Q4_K_M.gguf</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">ilab model serve --model-path /home/instruct/files/summit-connect-merlinite-lab-Q4.gguf</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Esperamos unos segundos, volvemos al segundo terminal e iniciamos el chat con el LLM.</p>
+<p>Esperamos unos segundos hasta obtener la confirmación de que se está sirviendo:</p>
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">ilab model chat -m ~/.cache/instructlab/models/ggml-ilab-pretrained-Q4_K_M.gguf</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">INFO 2024-10-20 17:24:33,497 instructlab.model.serve:136: Using model '/home/instruct/summit-connect-merlinite-lab-Q4.gguf' with -1 gpu-layers and 4096 max context size.
+INFO 2024-10-20 17:24:33,497 instructlab.model.serve:140: Serving model '/home/instruct/summit-connect-merlinite-lab-Q4.gguf' with llama-cpp
+INFO 2024-10-20 17:24:34,492 instructlab.model.backends.llama_cpp:232: Replacing chat template:
+ {% for message in messages %}
+{% if message['role'] == 'user' %}
+{{ '&lt;|user|&gt;
+' + message['content'] }}
+{% elif message['role'] == 'system' %}
+{{ '&lt;|system|&gt;
+' + message['content'] }}
+{% elif message['role'] == 'assistant' %}
+{{ '&lt;|assistant|&gt;
+' + message['content'] + eos_token }}
+{% endif %}
+{% if loop.last and add_generation_prompt %}
+{{ '&lt;|assistant|&gt;' }}
+{% endif %}
+{% endfor %}
+INFO 2024-10-20 17:24:34,495 instructlab.model.backends.llama_cpp:189: Starting server process, press CTRL+C to shutdown server...
+INFO 2024-10-20 17:24:34,495 instructlab.model.backends.llama_cpp:190: After application startup complete see http://127.0.0.1:8000/docs for API.</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>¡Llega la hora de la verdad! Prueba a preguntar al LLM sobre InstructLab:</p>
+<p>Llega el momento de la verdad, comprobar si el modelo que hemos entrenado funciona en la web de Parasol. Vamos a cambiar de pestaña a "Parasol".</p>
+</div>
+<div class="paragraph">
+<p>¡IMPORTANTE! Tenemos que refrescar la web del navegador para aplicar nuestros cambios.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/parasol-view.png" alt="parasol view">
+</div>
+</div>
+<div class="paragraph">
+<p>Ahora volvemos al primer caso, el del coche de Marty McFly con número CLM195501.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/parasol-claim.png" alt="parasol claim">
+</div>
+</div>
+<div class="paragraph">
+<p>Sólo queda abrir la sesión de chat con el modelo clicando en el botón azul de la esquina inferior derecha. Si ya la tienes abierta, clica en el botón <code>+</code> que aparece debajo de la caja en la que escribimos texto. De esta forma, iniciaremos un nuevo chat.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/parasol-chat.webp" alt="parasol chat">
+</div>
+</div>
+<div class="paragraph">
+<p>Vamos a preguntar al chatbot la misma pregunta que le hicimos anteriormente y comprobar qué ha aprendido.</p>
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">Can you give me a short summary of what InstructLab is?</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">How much does it cost to repair a flux capacitor?</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>¡Yuju! La respuesta debería ser mucho mejor que la última vez. El LLM debe ser capaz de explicar que InstructLab.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/parasol-chat-response.webp" alt="parasol chat response">
+</div>
 </div>
 <div class="sect2">
 <h3 id="_conclusión"><a class="anchor" href="#_conclusión"></a>Conclusión</h3>
@@ -688,13 +862,13 @@ Aborted!</code></pre>
 <div class="ulist">
 <ul>
 <li>
-<p>Chatear con un LLM</p>
+<p>Servir y chatear con un LLM en nuestra web</p>
 </li>
 <li>
-<p>Modificar la taxonomía de InstructLab</p>
+<p>Preparar los datos de entrenamiento y modificar la taxonomía de InstructLab</p>
 </li>
 <li>
-<p>Comprobar el desempeño del modelo entrenado</p>
+<p>Generar datos sintéticos y comprobar el desempeño del modelo entrenado</p>
 </li>
 </ul>
 </div>
