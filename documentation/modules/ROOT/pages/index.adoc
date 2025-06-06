@@ -1,8 +1,3 @@
-
-
-
-image::instructlab-banner.png[]
-
 [#instructlab]
 == ¡Bienvenido al workshop!
 
@@ -14,7 +9,7 @@ Puede parecer una tarea complicada, ¡pero ahí entra en juego InstructLab! Se t
 
 [#objetivos]
 
-== 🏁 Objetivos del Laboratorio
+== 🏁 Objetivos del Laboratorio 1: InstructLab y la IA generativa
 
 En este laboratorio, trabajaremos para una compañía de seguros ficticia, Parasol. Esta empresa quiere utilizar modelos de IA generativa para responder preguntas sobre accidentes de vehículos y así acelerar el ritmo de trabajo de sus equipos.
 
@@ -24,4 +19,12 @@ En resumen, lo que haremos será:
 2. *Preparar el entrenamiento*. Descubrirás la pieza central de InstructLab, las taxonomías.
 3. *Comprobar el resultado final*. Chatearemos con el modelo entrenado para ver los resultados.
 
-Te guiaremos paso a paso para que veas el funcionamiento de InstructLab. *¡Vamos allá!*
+Te guiaremos paso a paso a lo largo del laboratorio. Recuerda que InstructLab es una herramienta que no requiere de conocimientos previos en el ámbito de la inteligencia articial.
+
+== 🏁 Objetivos del Laboratorio 2: Agentes
+
+Ollama
+LLamaStack
+Ramalama
+
+Modelos LLama

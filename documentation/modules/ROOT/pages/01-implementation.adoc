@@ -1,4 +1,6 @@
-= Laboratorio
+image::instructlab-banner.png[]
+
+= Laboratorio 1: InstructLab y la IA generativa
 
 [#comprender]
 == 🔍 Comprender el entorno
@@ -577,12 +579,12 @@ image::parasol-chat-response.webp[]
 
 === Conclusión
 
-*¡Laboratorio terminado con éxito!* Esperamos que hayas disfrutado probando de primera mano el potencial de InstructLab. Como pequeño repaso, has conseguido lo siguiente:
+*Has terminado el laboratorio de InstructLab con éxito!* Como pequeño repaso, has conseguido lo siguiente:
 
 * Servir y chatear con un LLM en nuestra web
 * Preparar los datos de entrenamiento y modificar la taxonomía de InstructLab
 * Generar datos sintéticos y comprobar el desempeño del modelo entrenado
 
-Gracias por haber dedicado tu esfuerzo y tiempo a aprender más sobre inteligencia articial y LLMs. Para más información sobre InstructLab, ¡echa un ojo a la comunidad en Github! https://github.com/instructlab
+Si quieres continuar aprendiendo sobre el funcionamiento de InstructLab, no dudes en visitar la link:https://instructlab.ai/[web oficial]. Te dejamos también a su  link:https://github.com/instructlab[repositorio] en GitHub
 
-
+Ahora vamos a centrarnos en la parte de agentes y descubrir herramientas open-source que nos hagan su uso mucho más fácil. ¡Adelante!

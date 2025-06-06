@@ -1,26 +1,16 @@
 include::_attributes.adoc[]
 
-== Introducción al Laboratorio
+image::ramalama.png[]
 
-Durante este laboratorio, aprenderás cómo entrenar un Modelo de Lenguaje Grande (LLM) con generación de datos sintéticos mediante InstructLab.
+= Laboratorio 2: Nuestro primer agente
 
-[#que-es-un-llm]
-=== ¿Qué es un LLM?
+'Vamos 
+Un agente de IA es un sistema que puede tomar decisiones o responder preguntas de forma inteligente. En este caso, es un asistente conversacional que usa inteligencia artificial para ayudarte a encontrar información en documentos.
 
-Un LLM es un modelo de inteligencia artificial que usa aprendizaje profundo para generar texto similar al humano. Estos modelos aprenden patrones del lenguaje a partir de grandes cantidades de datos y se utilizan para tareas de procesamiento de lenguaje natural, como pueden ser traducciones o sintésis de textos.
+En este segundo laboratorio, vas a crear y probar tu primer agente. Este agente podrá responder preguntas usando documentos reales (como PDFs, presentaciones, manuales o páginas web) gracias a una técnica llamada RAG (Retrieval-Augmented Generation).
 
-[#como-entrenar-llm]
-=== ¿Cómo se entrenan los LLM?
+[#entorno]
+== 1. Configurar el entorno
 
-Los LLM se entrenan con técnicas de aprendizaje profundo en varias fases:
-
-* *Recolección de datos*: Recolección de texto de diversas fuentes.
-* *Preprocesamiento*: Limpieza de datos.
-* *Tokenización*: División del texto en unidades manejables.
-* *Pre-entrenamiento*: Aprendizaje de patrones.
-* *Alineación*: Ajuste del modelo para que cumpla con objetivos humanos.
-
-[#relacion-instructlab]
-=== ¿Cómo se relaciona con InstructLab?
-
-InstructLab usa generación de datos sintéticos para entrenar modelos, reduciendo la dependencia de anotaciones humanas. Es decir, puede hacer uso del LLM para generar datos con los que seguir entrenando el modelo.
+[#agente]
+== 2. Interactuar con el agente
