@@ -3,9 +3,8 @@ include::_attributes.adoc[]
 image::ramalama.png[]
 
 = Laboratorio 2: Nuestro primer agente
-
-'Vamos 
-Un agente de IA es un sistema que puede tomar decisiones o responder preguntas de forma inteligente. En este caso, es un asistente conversacional que usa inteligencia artificial para ayudarte a encontrar información en documentos.
+ 
+Un agente de IA es un sistema que puede tomar decisiones o responder preguntas de forma inteligente. 
 
 En este segundo laboratorio, vas a crear y probar tu primer agente. Este agente podrá responder preguntas usando documentos reales (como PDFs, presentaciones, manuales o páginas web) gracias a una técnica llamada RAG (Retrieval-Augmented Generation).
 
@@ -14,3 +13,24 @@ En este segundo laboratorio, vas a crear y probar tu primer agente. Este agente 
 
 [#agente]
 == 2. Interactuar con el agente
+
+
+ramalama
+
+Instalar Python
+
+Podman
+
+Vamos a ver cómo sería el proceso. 
+
+Documento NVIDIA
+
+Repositorio de Quay de ramalama.
+
+
+
+What are some recent examples of litigation faced by NVIDIA corporation?
+
+
+curl -fsSL https://ollama.com/install.sh | sh
+
