@@ -48,7 +48,7 @@ Ollama está ya instalado y ahora vamos a descargar el modelo LLama3.2 con 3 bil
 [.console-input]
 [source,bash]
 ----
-curl -fsSL https://ollama.com/install.sh | sh
+ollama pull llama3.2:3b
 ----
 
 

@@ -3,15 +3,11 @@ import os
 import faiss
 import ollama
 from sentence_transformers import SentenceTransformer
-from PyPDF2 import PdfReader
 
-# Cargar texto desde PDF
-def load_text_from_pdf(file_path):
-    reader = PdfReader(file_path)
-    text = ""
-    for page in reader.pages:
-        text += page.extract_text() + "\n"
-    return text
+# Leer archivo Markdown como texto
+def load_text_from_markdown(file_path):
+    with open(file_path, 'r', encoding='utf-8') as f:
+        return f.read()
 
 # Dividir texto en fragmentos
 def chunk_text(text, chunk_size=500, overlap=100):
@@ -23,7 +19,7 @@ def chunk_text(text, chunk_size=500, overlap=100):
         start += chunk_size - overlap
     return chunks
 
-# Generar embeddings de los fragmentos
+# Generar embeddings
 def embed_chunks(chunks, model_name="all-MiniLM-L6-v2"):
     model = SentenceTransformer(model_name)
     embeddings = model.encode(chunks)
@@ -36,13 +32,13 @@ def build_faiss_index(embeddings):
     index.add(embeddings)
     return index
 
-# Buscar fragmentos relevantes según la pregunta
+# Recuperar fragmentos relevantes
 def get_relevant_chunks(query, chunks, index, embed_model, top_k=3):
     q_emb = embed_model.encode([query])
     D, I = index.search(q_emb, top_k)
     return "\n".join([chunks[i] for i in I[0]])
 
-# Enviar pregunta + contexto al modelo llama3
+# Generar respuesta usando Ollama
 def generate_response_with_context(query, context):
     full_prompt = f"""Responde la siguiente pregunta usando el contexto proporcionado.
 
@@ -65,8 +61,8 @@ def generate_response_with_context(query, context):
 # MAIN
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print("❌ Debes indicar la ruta del documento. Ejemplo:")
-        print("   python rag_agent.py documento.pdf")
+        print("❌ Debes indicar la ruta del documento Markdown. Ejemplo:")
+        print("   python rag_agent.py archivo.md")
         sys.exit(1)
 
     doc_path = sys.argv[1]
@@ -75,13 +71,12 @@ if __name__ == "__main__":
         print(f"❌ El archivo '{doc_path}' no existe.")
         sys.exit(1)
 
-    if doc_path.lower().endswith('.pdf'):
-        print("📄 Leyendo PDF...")
-        raw_text = load_text_from_pdf(doc_path)
-    else:
-        print("📄 Leyendo archivo de texto...")
-        with open(doc_path, 'r', encoding='utf-8') as f:
-            raw_text = f.read()
+    if not doc_path.lower().endswith('.md') and not doc_path.lower().endswith('.txt'):
+        print("❌ Solo se aceptan archivos .md o .txt.")
+        sys.exit(1)
+
+    print("📄 Leyendo archivo Markdown...")
+    raw_text = load_text_from_markdown(doc_path)
 
     chunks = chunk_text(raw_text)
 
@@ -100,4 +95,3 @@ if __name__ == "__main__":
 
     print("\n🧠 Respuesta del agente:\n")
     print(answer)
-
