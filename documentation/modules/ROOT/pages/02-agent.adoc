@@ -77,8 +77,18 @@ mkdir /home/instruct/rag
 curl -o /home/instruct/rag/rag_agent.py https://raw.githubusercontent.com/dgpmakes/instructlab-start/refs/heads/master/ilab/rag_agent.py
 ----
 
+Vamos a echarle un ojo al código, puedes verlo con el siguiente comando:
 
+[.console-input]
+[source,bash]
+----
+cat /home/instruct/rag/rag_agent.py
+----
 
+[source,bash]
+----
+cat /home/instruct/rag/rag_agent.py
+----
 
 Python
 
