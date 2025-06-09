@@ -52,6 +52,7 @@ ollama pull llama3.2:3b
 ----
 
 
+
 Ya tenemos el modelo así que ahora está en nuestras manos desarrollar el agente. Lo más común es utilizar Python sobre todo por la enorme variedad de librerías especializadas en IA y por su simplicidad a la hora de programar. Vamos a descargar las librerías que nos hacen falta para ejecutar nuestro agente:
 
 [.console-input]
