@@ -3,12 +3,12 @@
 ** xref:index.adoc#objetivos[Objetivos]
 
 
-* xref:01-implementation.adoc[Laboratorio 1: InstructLab y la IA generativa]
-** xref:01-implementation.adoc#comprender[Comprender el entorno]
-** xref:01-implementation.adoc#uso-basico[1. Interactuar con un modelo]
-** xref:01-implementation.adoc#entrenamiento[2. Entrenar modelo]
-** xref:01-implementation.adoc#interaccion[3. Comprobar modelo entrenado]
+* xref:01-instructlab.adoc[Laboratorio 1: InstructLab y la IA generativa]
+** xref:01-instructlab.adoc#comprender[Comprender el entorno]
+** xref:01-instructlab.adoc#uso-basico[1. Interactuar con un modelo]
+** xref:01-instructlab.adoc#entrenamiento[2. Entrenar modelo]
+** xref:01-instructlab.adoc#interaccion[3. Comprobar modelo entrenado]
 
-* xref:02-annex.adoc[Laboratorio 2: Nuestro primer agente]
-** xref:02-annex.adoc#entorno[1. Configurar el entorno]
-** xref:02-annex.adoc#agente[2. Interactuar con el agente]
+* xref:02-agent.adoc[Laboratorio 2: Nuestro primer agente]
+** xref:02-agent.adoc#entorno[1. Configurar el entorno]
+** xref:02-agent.adoc#agente[2. Interactuar con el agente]
