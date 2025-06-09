@@ -148,6 +148,30 @@ Aborted!</code></pre>
 </div>
 </div>
 <div class="paragraph">
+<p>Podrás ver cómo va la instalación con una barra de progreso. Una vez que esté al 100%, deberías recibir esto:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">######################################### 100.0%
+&gt;&gt;&gt; Creating ollama user...
+&gt;&gt;&gt; Adding ollama user to render group...
+&gt;&gt;&gt; Adding ollama user to video group...
+&gt;&gt;&gt; Adding current user to ollama gröup...
+&gt;&gt;&gt; Creating ollama systemd service...
+&gt;&gt;&gt; Enabling and starting ollama service...
+Created symlink /etc/systemd/system/default.target.wants/ollama,service - /etc/systemd/system/olLama.service:
+&gt;&gt;&gt; NVIDIA GPU installed.</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Ollama está ya instalado y ahora vamos a descargar el modelo LLama3.2 con 3 billones de parámetros. Un modelo bastante pequeño pero que funciona correctamente para este tipo de tareas:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">curl -fsSL https://ollama.com/install.sh | sh</code></pre>
+</div>
+</div>
+<div class="paragraph">
 <p>Ya tenemos el modelo así que ahora está en nuestras manos desarrollar el agente. Lo más común es utilizar Python sobre todo por la enorme variedad de librerías especializadas en IA y por su simplicidad a la hora de programar. Vamos a descargar las librerías que nos hacen falta para ejecutar nuestro agente:</p>
 </div>
 <div class="listingblock console-input">
@@ -173,11 +197,12 @@ pip install PyPDF2</code></pre>
 </ul>
 </div>
 <div class="paragraph">
-<p>Procedemos a descargar el código:</p>
+<p>Procedemos a descargar el código de Python:</p>
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">curl -O https://raw.githubusercontent.com/dgpmakes/instructlab-start/refs/heads/master/ilab/rag_agent.py</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">mkdir /home/instruct/rag
+curl -o /home/instruct/rag/rag_agent.py https://raw.githubusercontent.com/dgpmakes/instructlab-start/refs/heads/master/ilab/rag_agent.py</code></pre>
 </div>
 </div>
 <div class="paragraph">
