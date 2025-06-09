@@ -28,6 +28,30 @@ Para empezar, debemos instalar link:https://instructlab.ai/[Ollama]. Esta es una
 curl -fsSL https://ollama.com/install.sh | sh
 ----
 
+Podrás ver cómo va la instalación con una barra de progreso. Una vez que esté al 100%, deberías recibir esto:
+
+[source,bash]
+----
+######################################### 100.0%
+>>> Creating ollama user...
+>>> Adding ollama user to render group...
+>>> Adding ollama user to video group...
+>>> Adding current user to ollama gröup...
+>>> Creating ollama systemd service...
+>>> Enabling and starting ollama service...
+Created symlink /etc/systemd/system/default.target.wants/ollama,service - /etc/systemd/system/olLama.service:
+>>> NVIDIA GPU installed.
+----
+
+Ollama está ya instalado y ahora vamos a descargar el modelo LLama3.2 con 3 billones de parámetros. Un modelo bastante pequeño pero que funciona correctamente para este tipo de tareas:
+
+[.console-input]
+[source,bash]
+----
+curl -fsSL https://ollama.com/install.sh | sh
+----
+
+
 Ya tenemos el modelo así que ahora está en nuestras manos desarrollar el agente. Lo más común es utilizar Python sobre todo por la enorme variedad de librerías especializadas en IA y por su simplicidad a la hora de programar. Vamos a descargar las librerías que nos hacen falta para ejecutar nuestro agente:
 
 [.console-input]
@@ -44,13 +68,15 @@ Estas librerías nos van a permitir realizar flujos RAG:
 * `faiss-cpu`: Para una búsqueda eficiente en grandes colecciones de vectores. Permite encontrar los vectores más cercanos a una consulta de forma muy rápida.
 * `PyPDF2`: Permite leer, extraer texto y manipular archivos PDF desde Python.
 
-Procedemos a descargar el código:
+Procedemos a descargar el código de Python:
 
 [.console-input]
 [source,bash]
 ----
-curl -O https://raw.githubusercontent.com/dgpmakes/instructlab-start/refs/heads/master/ilab/rag_agent.py
+mkdir /home/instruct/rag
+curl -o /home/instruct/rag/rag_agent.py https://raw.githubusercontent.com/dgpmakes/instructlab-start/refs/heads/master/ilab/rag_agent.py
 ----
+
 
 
 
@@ -81,7 +107,6 @@ Repositorio de Quay de ramalama.
 
 
 What are some recent examples of litigation faced by NVIDIA corporation?
-
 
 
 
