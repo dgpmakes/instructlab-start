@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Untitled :: Red Hat Innovate Together</title>
+    <link rel="canonical" href="https://github.com/dgpmakes/instructlab-start/company/02-agent.html">
+    <link rel="prev" href="01-instructlab.html">
+    <meta name="generator" content="Antora 3.0.0">
+    <link rel="stylesheet" href="../_/css/site.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img src="../_/img/RHDLogo.svg" height="40px" alt="Red Hat Developer Program"></a>
+      <a class="navbar-item" style="font-size: 24px; color: white" href="https://github.com/dgpmakes/instructlab-start">Red Hat Innovate Together</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://developers.redhat.com/ebooks/" target="_blank">Books</a>
+        <a class="navbar-item" href="https://developers.redhat.com/cheatsheets/" target="_blank">Cheat Sheets</a>
+        <a class="navbar-item" href="https://developers.redhat.com/events/" target="_blank">Upcoming Events</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">More Tutorials</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/kubernetes-tutorial/" target="_blank">Kubernetes</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/istio-tutorial/" target="_blank">Istio</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/quarkus-tutorial/" target="_blank">Quarkus</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/knative-tutorial/" target="_blank">Knative</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/tekton-tutorial/" target="_blank">Tekton</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="company" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html"></a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="index.html">Antes de empezar</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="index.html#instructlab">¡Bienvenido al workshop!</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="index.html#objetivos">Objetivos</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="01-instructlab.html">Laboratorio 1: InstructLab y la IA generativa</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="01-instructlab.html#comprender">Comprender el entorno</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="01-instructlab.html#uso-basico">1. Interactuar con un modelo</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="01-instructlab.html#entrenamiento">2. Entrenar modelo</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="01-instructlab.html#interaccion">3. Comprobar modelo entrenado</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="02-agent.html">Laboratorio 2: Nuestro primer agente</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#entorno">1. Configurar el entorno</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#agente">2. Interactuar con el agente</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">Innovate Together</a></li>
+    <li><a href="02-agent.html">Laboratorio 2: Nuestro primer agente</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/dgpmakes/instructlab-start/edit/master/documentation/modules/ROOT/pages/02-agent.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<article class="doc">
+<div class="imageblock">
+<div class="content">
+<img src="_images/ramalama.png" alt="ramalama">
+</div>
+</div>
+<h1 id="_laboratorio_2_nuestro_primer_agente" class="sect0"><a class="anchor" href="#_laboratorio_2_nuestro_primer_agente"></a>Laboratorio 2: Nuestro primer agente</h1>
+<div class="paragraph">
+<p>Un agente es un sistema que puede tomar decisiones o responder preguntas de forma inteligente. Cuando hablamos de inteligencia artifical, las posibilidades se multiplican y podemos hacer que estos agentes lleguen a ocuparse de tareas muy específicas. De esta forma aceleramos nuestro proceso de trabajo y disponemos de herramientas aún más útiles.</p>
+</div>
+<div class="paragraph">
+<p>En este segundo laboratorio, vamos a utilizar un modelo de lenguaje grande (LLM) e integrarlo en un agente de inteligencia artificial que nos permita hacer preguntas sobre documentos de nuestro dispositivo. Esto lo haremos gracias a la técnica RAG (Retrieval-Augmented Generation). El agente tomara nuestra pregunta, usará el archivo para obtener contexto y finalmente el modelo generará la respuesta más acorde.</p>
+</div>
+<div class="sect1">
+<h2 id="entorno"><a class="anchor" href="#entorno"></a>1. Configurar el entorno</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Vamos a continuar trabajando en el terminal superior del laboratorio. Si estamos sirviendo un modelo, dejamos de ejecutarlo clicando en ese terminal y pulsando <code>CTRL</code>+<code>C</code> para obtener esto:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">INFO 2025-24-09 12:41:08,496 server.py:197 After application startup complete see http://127.0.0.1:8000/docs for API.
+^C
+Aborted!</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Para empezar, debemos instalar <a href="https://instructlab.ai/">Ollama</a>. Esta es una herramienta que nos permite descargar una amplia variedad de modelos open-source y además poder ejecutarlos de forma local sacando partido a nuestro hardware. Simplemente ejecutamos en el terminal superior:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">curl -fsSL https://ollama.com/install.sh | sh</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Ya tenemos el modelo así que ahora está en nuestras manos desarrollar el agente. Lo más común es utilizar Python sobre todo por la enorme variedad de librerías especializadas en IA y por su simplicidad a la hora de programar. Vamos a descargar las librerías que nos hacen falta para ejecutar nuestro agente:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">pip install sentence-transformers faiss-cpu
+pip install PyPDF2</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Estas librerías nos van a permitir realizar flujos RAG:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>sentence-transformers</code>: Permite convertir textos (frases, párrafos, documentos) en vectores numéricos llamados embeddings.</p>
+</li>
+<li>
+<p><code>faiss-cpu</code>: Para una búsqueda eficiente en grandes colecciones de vectores. Permite encontrar los vectores más cercanos a una consulta de forma muy rápida.</p>
+</li>
+<li>
+<p><code>PyPDF2</code>: Permite leer, extraer texto y manipular archivos PDF desde Python.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Procedemos a descargar el código:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">curl -O https://raw.githubusercontent.com/dgpmakes/instructlab-start/refs/heads/master/ilab/rag_agent.py</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Python</p>
+</div>
+<div class="paragraph">
+<p>Pillar archivo texto o PDF</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="agente"><a class="anchor" href="#agente"></a>2. Interactuar con el agente</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>python rag_agent.py &lt;archivo&gt;</p>
+</div>
+<div class="paragraph">
+<p>Hacerle preguntas</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_3_agentes_en_el_mundo_de_la_contenerización"><a class="anchor" href="#_3_agentes_en_el_mundo_de_la_contenerización"></a>3. Agentes en el mundo de la contenerización</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Ramalama</p>
+</div>
+<div class="paragraph">
+<p>Podman</p>
+</div>
+<div class="paragraph">
+<p>Vamos a ver cómo sería el proceso.</p>
+</div>
+<div class="paragraph">
+<p>Documento NVIDIA</p>
+</div>
+<div class="paragraph">
+<p>Repositorio de Quay de ramalama.</p>
+</div>
+<div class="paragraph">
+<p>What are some recent examples of litigation faced by NVIDIA corporation?</p>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="01-instructlab.html">Laboratorio 1: InstructLab y la IA generativa</a></span>
+</nav>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <a class="rhd-logo" href="https://developers.redhat.com" target="_blank"></div>
+</footer>
+<script src="../_/js/vendor/clipboard.js"></script>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
